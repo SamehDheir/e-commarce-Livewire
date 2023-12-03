@@ -28,7 +28,8 @@
                     <div class="card col-lg-4 mx-auto">
                         <div class="card-body px-5 py-5">
                             <h3 class="card-title text-left mb-3">Login</h3>
-                            <form action="{{ route('admin.login') }}" method="POST"> @csrf
+                            <form action="{{ route('admin.login') }}" method="POST">
+                                @csrf
                                 <div class="form-group mb-1 mt-3">
                                     <label>Email *</label>
                                     <input type="text" name="email" class="form-control p_input">

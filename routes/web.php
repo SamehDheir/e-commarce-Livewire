@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SiteController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +23,8 @@ Route::prefix('/admin')->group(function () {
     Route::get('/login', [AdminController::class, 'login_form'])->name('admin.login_form');
     Route::post('/login/owner', [AdminController::class, 'login'])->name('admin.login');
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('admin');
+    Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact')->middleware('admin');
 });
 
 // Site Route
@@ -36,3 +39,7 @@ Route::prefix('/')->group(function () {
     Route::get('/404', [SiteController::class, 'error_404'])->name('site.error_404');
     Route::get('/500', [SiteController::class, 'error_500'])->name('site.error_500');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
