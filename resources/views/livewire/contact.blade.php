@@ -9,8 +9,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Subject</th>
-                                <th>Message</th>
-                                <th>Status</th>
+                                <th style="width: 30px">Message</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -21,20 +20,23 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->subject }}</td>
-                                    <td>{{ $item->message }}</td>
-                                    @if (empty($item->softDelete))
-                                        <td><label class="badge badge-success">Not Deleted</label></td>
-                                    @else
-                                        <td><label class="badge badge-danger">Deleted</label></td>
-                                    @endif
-
-                                    <td><i class="bi bi-trash"></i></td>
+                                    <td>
+                                        {{ $item->message }}</td>
+                                    <td>
+                                        <span wire:click.prevent='delete({{ $item->id }})'
+                                            class="border-1 mx-1 p-2 rounded fs-1 btn-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </span>
+                                    </td>
                                 </tr>
                             @endforeach
 
                         </tbody>
+
                     </table>
                 </div>
+                <br/>
+                {{ $contact->links() }}
             </div>
         </div>
     </div>

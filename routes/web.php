@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +26,9 @@ Route::prefix('/admin')->group(function () {
     Route::post('/login/owner', [AdminController::class, 'login'])->name('admin.login');
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('admin');
-    Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact')->middleware('admin');
+    Route::get('/contact', [ContactController::class, 'index'])->name('admin.tables.contact')->middleware('admin');
+    Route::get('/categories', [CategoriesController::class, 'index'])->name('admin.tables.categories')->middleware('admin');
+    Route::get('/products', [ProductsController::class, 'index'])->name('admin.tables.products')->middleware('admin');
 });
 
 // Site Route
