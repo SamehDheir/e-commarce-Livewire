@@ -1,9 +1,12 @@
-    <div class="col-lg-12 grid-margin stretch-card">
+    <div wire:poll class="col-lg-12 grid-margin stretch-card">
         <div class="card">
+            <div class="card-header">
+                <a href="" class="btn btn-primary">Add Category</a>
+            </div>
             <div class="card-body">
                 @if (session('success'))
                     <div class="alert alert-success" role="alert">
-                       {{ session('success') }}
+                        {{ session('success') }}
                     </div>
                 @endif
                 <div class="table-responsive">

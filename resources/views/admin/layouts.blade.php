@@ -101,6 +101,15 @@
                 </li>
 
                 <li class="nav-item menu-items">
+                    <a class="nav-link" href="{{ route('admin.tables.users') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-speedometer"></i>
+                        </span>
+                        <span class="menu-title">Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-items">
                     <a class="nav-link" href="{{ route('admin.tables.contact') }}">
                         <span class="menu-icon">
                             <i class="mdi mdi-speedometer"></i>
@@ -325,7 +334,11 @@
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
-                                        <p class="preview-subject mb-1">Log out</p>
+                                        <form action="{{ route('admin.logout') }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="preview-subject mb-1 border-0 text-light" style="background-color: transparent">Log
+                                                out</button>
+                                        </form>
                                     </div>
                                 </a>
                                 <div class="dropdown-divider"></div>

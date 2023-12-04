@@ -12,6 +12,7 @@ class Contact extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
+   
     public function delete($id)
     {
         $contact = ModelsContact::find($id);

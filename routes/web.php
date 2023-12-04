@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,31 +20,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 
 Route::prefix('/admin')->group(function () {
     Route::get('/login', [AdminController::class, 'login_form'])->name('admin.login_form');
     Route::post('/login/owner', [AdminController::class, 'login'])->name('admin.login');
-    Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+    Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('admin');
     Route::get('/contact', [ContactController::class, 'index'])->name('admin.tables.contact')->middleware('admin');
     Route::get('/categories', [CategoriesController::class, 'index'])->name('admin.tables.categories')->middleware('admin');
     Route::get('/products', [ProductsController::class, 'index'])->name('admin.tables.products')->middleware('admin');
+    Route::get('/users', [UserController::class, 'index'])->name('admin.tables.users')->middleware('admin');
 });
 
 // Site Route
 Route::prefix('/')->group(function () {
     Route::get('/', [SiteController::class, 'home'])->name('site.home');
-    Route::get('/cart', [SiteController::class, 'cart'])->name('site.cart');
+    Route::get('/product-details', [SiteController::class, 'product_details'])->name('site.product.details');
+    Route::get('/cart', [SiteController::class, 'cart'])->name('site.cart')->middleware('auth');
     Route::get('/blog', [SiteController::class, 'blog'])->name('site.blog');
-    Route::get('/checkout', [SiteController::class, 'checkout'])->name('site.checkout');
+    Route::get('/checkout', [SiteController::class, 'checkout'])->name('site.checkout')->middleware('auth');
     Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
-    Route::get('/blog_details', [SiteController::class, 'blog_details'])->name('site.blog_details');
-    Route::get('/shop_details', [SiteController::class, 'shop_details'])->name('site.blog_details');
-    Route::get('/404', [SiteController::class, 'error_404'])->name('site.error_404');
-    Route::get('/500', [SiteController::class, 'error_500'])->name('site.error_500');
+    Route::get('/blog-details', [SiteController::class, 'blog_details'])->name('site.blog.details');
+    Route::get('/shop', [SiteController::class, 'shop'])->name('site.shop');
+    Route::get('/404', [SiteController::class, 'error_404'])->name('site.error.404');
+    Route::get('/500', [SiteController::class, 'error_500'])->name('site.error.500');
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

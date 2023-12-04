@@ -1,4 +1,4 @@
-    <div class="col-lg-12 grid-margin stretch-card">
+    <div wire:poll class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -35,7 +35,7 @@
 
                     </table>
                 </div>
-                <br/>
+                <br />
                 {{ $contact->links() }}
             </div>
         </div>

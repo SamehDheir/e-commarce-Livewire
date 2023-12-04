@@ -19,6 +19,7 @@ class Products extends Component
     public $name;
     public $price;
     public $rate;
+    public $category_id;
     public $image;
 
 
@@ -62,6 +63,7 @@ class Products extends Component
                 'name' => $this->name,
                 'price' => $this->price,
                 'rate' => $this->rate,
+                'category_id' => $this->category_id,
                 // 'image' => $this->image,
             ]
         );

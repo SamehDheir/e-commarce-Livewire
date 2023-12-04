@@ -1,81 +1,77 @@
 /*---------------------
-  Blog
+    Blog
 -----------------------*/
+.blog {
+    padding-top: 70px;
+    padding-bottom: 80px;
+}
+
 .blog__item {
-    margin-bottom: 60px;
+    margin-bottom: 35px;
 }
 
 .blog__item__pic {
+    height: 240px;
 
-    img {
-        min-width: 100%;
+    &.large__item {
+        height: 540px;
     }
 }
 
 .blog__item__text {
-    padding-top: 25px;
+    padding: 25px 20px 0 0;
+    margin-right: 30px;
+    background: $white-color;
+    margin-top: -54px;
+
+    h6 {
+        margin-bottom: 6px;
+        
+        a {
+            color: $heading-color;
+            font-weight: 600;
+            line-height: 21px;
+        }
+    }
 
     ul {
-        margin-bottom: 15px;
 
         li {
-            font-size: 16px;
-            color: #b2b2b2;
-            list-style: none;
+            font-size: 12px;
+            color: #888888;
             display: inline-block;
-            margin-right: 15px;
+            list-style: none;
+            margin-right: 25px;
+            position: relative;
+
+            span {
+                color: $heading-color;
+            }
+
+            &:after {
+                position: absolute;
+                right: -17px;
+                top: 0px;
+                content: "|";
+            }
 
             &:last-child {
                 margin-right: 0;
+
+                &:after {
+                    display: none;
+                }
             }
-        }
-    }
-
-    h5 {
-        margin-bottom: 12px;
-
-        a {
-            font-size: 20px;
-            color: $normal-color;
-            font-weight: 700;
-        }
-    }
-
-    p {
-        margin-bottom: 25px;
-    }
-
-    .blog__btn {
-        display: inline-block;
-        font-size: 14px;
-        color: $normal-color;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border: 1px solid #b2b2b2;
-        padding: 14px 20px 12px;
-        border-radius: 25px;
-
-        span {
-            position: relative;
-            top: 1px;
-            margin-left: 5px;
         }
     }
 }
 
-.blog__pagination {
-    @extend .product__pagination;
-    padding-top: 5px;
-    position: relative;
+.primary-btn {
 
-    &:before {
-        position: absolute;
-        left: 0;
-        top: -29px;
-        height: 1px;
-        width: 100%;
-        background: $black-color;
-        opacity: .1;
-        content: '';
+    &.load-btn {
+        color: $heading-color;
+        background: #f2f2f2;
+        padding: 12px 85px 10px;
+        border-radius: 50px;
     }
 }

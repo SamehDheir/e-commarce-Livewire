@@ -1,5 +1,8 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
+            <div class="card-header">
+                <a href="" class="btn btn-primary">Add Product</a>
+            </div>
             <div class="card-body">
                 @if (session('success'))
                     <div class="alert alert-success" role="alert">
@@ -24,6 +27,7 @@
                             @foreach ($products as $item)
                                 <tr wire:key={{ $item->id }}>
                                     <td>{{ $i++ }}</td>
+
                                     @if ($productIdToEdit == $item->id)
                                         <td>
                                             <input class="form-control" type="text" wire:model="name">
@@ -35,10 +39,19 @@
                                             <input class="form-control" type="number" wire:model="rate">
                                         </td>
                                         <td>
-                                            <div class="input-group mb-3">
-                                                <label class="input-group-text" for="inputGroupFile01">Upload</label>
-                                                <input type="file" wire:model="image" class="form-control"
-                                                    id="inputGroupFile01">
+                                            <input type="file" wire:model='image'>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlSelect2">Default select</label>
+                                                <select class="form-control" wire:model='category_id'
+                                                    id="exampleFormControlSelect2">
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}">
+                                                            {{ $category->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </td>
                                         <td>

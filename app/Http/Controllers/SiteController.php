@@ -12,6 +12,12 @@ class SiteController extends Controller
     }
 
     ////////////
+    public function product_details()
+    {
+        return view("site.product-details");
+    }
+
+    ////////////
     public function blog_details()
     {
         return view("site.blog-details");
@@ -24,21 +30,15 @@ class SiteController extends Controller
     }
 
     ////////////
-    public function shop_details()
+    public function shop()
     {
-        return view("site.shop-details");
-    }
-
-    ////////////
-    public function shop_grid()
-    {
-        return view("site.shop-grid");
+        return view("site.shop");
     }
 
     ////////////
     public function cart()
     {
-        return view("site.shoping-cart");
+        return view("site.shop-cart");
     }
 
     ////////////

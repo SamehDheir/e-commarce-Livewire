@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
+use App\Models\Contact;
+use App\Models\Products;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +15,12 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view("admin.dashboard");
+        return view("admin.dashboard", [
+            'categoryCount' => Categories::count(),
+            'productCount' => Products::count(),
+            'contactCount' => Contact::count(),
+            'userCount' => User::count(),
+        ]);
     }
 
     public function login_form()
