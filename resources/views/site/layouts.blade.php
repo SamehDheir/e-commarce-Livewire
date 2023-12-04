@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ asset('site/css/bootstrap.min.css') }}" type="text/css">
@@ -88,10 +89,14 @@
                     <div class="header__right">
                         <div class="header__right__auth">
                             @if (Route::has('login'))
-                                <span>{{ Auth::user()->name }}</span>
-                            @else
-                                <a href="{{ route('login') }}">Login</a>
-                                <a href="{{ route('register') }}">Register</a>
+                                @auth
+                                    <span class="fs-6">{{ Auth::user()->name }}</span>
+                                 @else
+                                    <a href="{{ route('login') }}">Login</a>
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}">Register</a>
+                                    @endif
+                                @endauth
                             @endif
                         </div>
                         <ul class="header__right__widget">
