@@ -92,7 +92,7 @@
                     <span class="nav-link">Navigation</span>
                 </li>
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                    <a wire:navigate class="nav-link" href="{{ route('admin.dashboard') }}">
                         <span class="menu-icon">
                             <i class="mdi mdi-speedometer"></i>
                         </span>
@@ -101,7 +101,7 @@
                 </li>
 
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ route('admin.tables.users') }}">
+                    <a wire:navigate class="nav-link" href="{{ route('admin.tables.users') }}">
                         <span class="menu-icon">
                             <i class="mdi mdi-speedometer"></i>
                         </span>
@@ -110,7 +110,7 @@
                 </li>
 
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ route('admin.tables.contact') }}">
+                    <a wire:navigate class="nav-link" href="{{ route('admin.tables.contact') }}">
                         <span class="menu-icon">
                             <i class="mdi mdi-speedometer"></i>
                         </span>
@@ -119,7 +119,7 @@
                 </li>
 
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ route('admin.tables.categories') }}">
+                    <a wire:navigate class="nav-link" href="{{ route('admin.tables.categories') }}">
                         <span class="menu-icon">
                             <i class="mdi mdi-speedometer"></i>
                         </span>
@@ -128,11 +128,20 @@
                 </li>
 
                 <li class="nav-item menu-items">
-                    <a class="nav-link" href="{{ route('admin.tables.products') }}">
+                    <a wire:navigate class="nav-link" href="{{ route('admin.tables.products') }}">
                         <span class="menu-icon">
                             <i class="mdi mdi-speedometer"></i>
                         </span>
                         <span class="menu-title">Products</span>
+                    </a>
+                </li>
+
+                <li class="nav-item menu-items">
+                    <a wire:navigate class="nav-link" href="{{ route('admin.tables.blogs') }}">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-speedometer"></i>
+                        </span>
+                        <span class="menu-title">Blogs</span>
                     </a>
                 </li>
 

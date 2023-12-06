@@ -6,8 +6,6 @@
 
 
 @section('content')
-
-
     <!-- Blog Details Section Begin -->
     <section class="blog-details spad">
         <div class="container">
@@ -15,28 +13,22 @@
                 <div class="col-lg-8 col-md-8">
                     <div class="blog__details__content">
                         <div class="blog__details__item">
-                            <img src="{{ asset('site/img/blog/details/blog-details.jpg') }}" alt="">
+                            <img src="{{ asset('storage/' . $blog->image) }}" alt="">
                             <div class="blog__details__item__title">
                                 <span class="tip">Street style</span>
-                                <h4>Being seen: how is age diversity effecting change in fashion and beauty?</h4>
+                                <h4>{{ $blog->title }}</h4>
                                 <ul>
-                                    <li>by <span>Ema Timahe</span></li>
-                                    <li>Seb 17, 2019</li>
+                                    <li>by <span>{{ $blog->auther }}</span></li>
+                                    <li>{{ $blog->created_at }}</li>
                                     <li>39 Comments</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="blog__details__desc">
-                            <p>Afashion season can be defined as much by the people on the catwalk as it can by the
-                                clothes they are wearing. This time around, a key moment came at the end of Marc Jacobs’
-                                New York show, when an almost makeup-free Christy Turlington made a rare return to the
-                                catwalk, aged 50 (she also stars, with the designer himself, in the label’s AW ad
-                                campaign), where the average catwalk model is around 18.</p>
-                            <p>A few days later, Simone Rocha arguably upped the ante. The 32-year-old’s show – in part
-                                inspired by Louise Bourgeois, who lived until she was 98 – featured models in their 30s
-                                and 40s, including cult favourite Jeny Howorth and actor Chloë Sevigny.</p>
+
+                            <p>{{ $blog->description }}</p>
                         </div>
-                        <div class="blog__details__quote">
+                        {{-- <div class="blog__details__quote">
                             <div class="icon"><i class="fa fa-quote-left"></i></div>
                             <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna
                                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -48,7 +40,7 @@
                                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                                 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
                                 dolor in reprehenderit in voluptate.</p>
-                        </div>
+                        </div> --}}
                         <div class="blog__details__tags">
                             <a href="#">Fashion</a>
                             <a href="#">Street style</a>

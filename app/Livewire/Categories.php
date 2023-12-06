@@ -25,7 +25,7 @@ class Categories extends Component
     {
         $this->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -36,6 +36,7 @@ class Categories extends Component
             'image' => $imagePath,
         ]);
         $this->showTable = true;
+        $this->reset('name', 'description', 'image');
         session()->flash('success', 'category updated successfully!');
     }
 

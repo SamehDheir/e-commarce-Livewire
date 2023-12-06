@@ -68,20 +68,24 @@
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="{{ route('site.home') }}">Home</a></li>
+                            <li class="{{ request()->is('/') ? 'active' : '' }}"><a
+                                    href="{{ route('site.home') }}">Home</a></li>
                             <li><a href="#">Women’s</a></li>
                             <li><a href="#">Men’s</a></li>
-                            <li><a href="{{ route('site.shop') }}">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li class="{{ request()->is('shop') ? 'active' : '' }}"><a
+                                    href="{{ route('site.shop') }}">Shop</a></li>
+                            <li class="{{ request()->is('cart') || request()->is('checkout') ? 'active' : '' }}"><a
+                                    href="#">Pages</a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ route('site.product.details') }}">Product Details</a></li>
+                                    {{-- <li><a href="{{ route('site.product.details') }}">Product Details</a></li> --}}
                                     <li><a href="{{ route('site.cart') }}">Shop Cart</a></li>
                                     <li><a href="{{ route('site.checkout') }}">Checkout</a></li>
-                                    <li><a href="{{ route('site.blog.details') }}">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{ route('site.blog') }}">Blog</a></li>
-                            <li><a href="{{ route('site.contact') }}">Contact</a></li>
+                            <li class="{{ request()->is('blog') ? 'active' : '' }}"><a
+                                    href="{{ route('site.blog') }}">Blog</a></li>
+                            <li class="{{ request()->is('contact') ? 'active' : '' }}"><a
+                                    href="{{ route('site.contact') }}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -91,7 +95,7 @@
                             @if (Route::has('login'))
                                 @auth
                                     <span class="fs-6">{{ Auth::user()->name }}</span>
-                                 @else
+                                @else
                                     <a href="{{ route('login') }}">Login</a>
                                     @if (Route::has('register'))
                                         <a href="{{ route('register') }}">Register</a>
@@ -208,9 +212,8 @@
                         <p>Copyright &copy;
                             <script>
                                 document.write(new Date().getFullYear());
-                            </script> All rights reserved | This template is made with <i
-                                class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                                target="_blank">Colorlib</a>
+                            </script> All rights reserved <i class="fa fa-heart"
+                                aria-hidden="true"></i> by Sameh
                         </p>
                     </div>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

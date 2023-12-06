@@ -9,57 +9,29 @@
             <div class="row">
                 <div class="col-lg-6 p-0">
                     <div class="categories__item categories__large__item set-bg"
-                        data-setbg="{{ asset('site/img/categories/category-1.jpg') }}">
+                        data-setbg="{{ asset('storage/' . $category_first->image) }}">
                         <div class="categories__text">
-                            <h1>Women’s fashion</h1>
-                            <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
-                                edolore magna aliquapendisse ultrices gravida.</p>
+                            <h1>{{ $category_first->name }}</h1>
+                            <p>{{ $category_first->description }}</p>
                             <a href="#">Shop now</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{ asset('site/img/categories/category-2.jpg') }}">
-                                <div class="categories__text">
-                                    <h4>Men’s fashion</h4>
-                                    <p>358 items</p>
-                                    <a href="#">Shop now</a>
+                        @foreach ($categories as $category)
+                            <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                                <div class="categories__item set-bg"
+                                    data-setbg="{{ asset('storage/' . $category->image) }}">
+                                    <div class="categories__text">
+                                        <h4>{{ $category->name }}</h4>
+                                        {{-- <p>{{ $categoryCount }}</p> --}}
+                                        <a href="#">Shop now</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{ asset('site/img/categories/category-3.jpg') }}">
-                                <div class="categories__text">
-                                    <h4>Kid’s fashion</h4>
-                                    <p>273 items</p>
-                                    <a href="#">Shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{ asset('site/img/categories/category-4.jpg') }}">
-                                <div class="categories__text">
-                                    <h4>Cosmetics</h4>
-                                    <p>159 items</p>
-                                    <a href="#">Shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                            <div class="categories__item set-bg"
-                                data-setbg="{{ asset('site/img/categories/category-5.jpg') }}">
-                                <div class="categories__text">
-                                    <h4>Accessories</h4>
-                                    <p>792 items</p>
-                                    <a href="#">Shop now</a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -161,8 +133,7 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix cosmetic">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg"
-                            data-setbg="{{ asset('site/img/product/product-4.jpg') }}">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/product/product-4.jpg') }}">
                             <ul class="product__hover">
                                 <li><a href="{{ asset('site/img/product/product-4.jpg') }}" class="image-popup"><span
                                             class="arrow_expand"></span></a></li>
@@ -572,6 +543,4 @@
         </div>
     </section>
     <!-- Services Section End -->
-
-  
 @endsection

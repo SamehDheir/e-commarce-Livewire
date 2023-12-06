@@ -23,15 +23,15 @@
                                 </li>
                                 <li>
                                     <h6><i class="fa fa-phone"></i> Phone</h6>
-                                    <p><span>125-711-811</span><span>125-668-886</span></p>
+                                    <p><span>+970 595 541 852</span></p>
                                 </li>
                                 <li>
                                     <h6><i class="fa fa-headphones"></i> Support</h6>
-                                    <p>Support.photography@gmail.com</p>
+                                    <p>sameh.dheir1@gmail.com</p>
                                 </li>
                             </ul>
                         </div>
-                        
+
                         @livewire('send-contact')
                     </div>
                 </div>

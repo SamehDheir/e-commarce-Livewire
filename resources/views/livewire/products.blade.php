@@ -1,10 +1,17 @@
-    <div wire:poll class="col-lg-12 grid-margin stretch-card">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <div>
+                    <div class="d-flex w-50 justify-content-between">
                         @if ($showTable)
                             <button wire:click="showForm" class="btn btn-primary">Add Product</button>
+                            <div class=" w-75">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" wire:model.live='search'
+                                        placeholder="Search Product Live" aria-label="Recipient's username"
+                                        aria-describedby="basic-addon2">
+                                </div>
+                            </div>
                         @else
                             <button wire:click="$set('showTable', true)" class="btn btn-danger">Cancle</button>
                         @endif
@@ -13,7 +20,8 @@
                 </div>
 
             </div>
-            <div class="card-body">
+            <div class="card-body" wire:poll.keep-alive-4s>
+
                 {{-- Success Message --}}
                 @if (session('success'))
                     <div class="alert alert-success" role="alert">
@@ -67,7 +75,7 @@
                                                     @enderror
                                                 </td>
                                                 <td>
-                                                    <input type="file" class="mb-2" wire:model='image'>
+                                                    <input multiple type="file" class="mb-2" wire:model='image'>
                                                     @error('image')
                                                         <div class="text-danger">
                                                             {{ $message }}
@@ -85,6 +93,11 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
+                                                    @error('category_id')
+                                                        <div class="text-danger">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </td>
                                                 <td>
                                                     <button wire:click='update({{ $item->id }})' class="btn">
@@ -179,11 +192,13 @@
                                         </div>
                                         <div class="form-group mb-2 mt-4">
                                             <label for="exampleFormControlSelect2">Image</label>
-                                            <input type="file" wire:model='image' class="form-control">
+                                            <input multiple type="file" wire:model='image' class="form-control">
                                         </div>
                                         @if ($image)
-                                            <img src="{{ $image->temporaryUrl() }}" class="my-4" width="200px"
-                                                height="200px" alt="Uploaded Image">
+                                            @foreach ($image as $item)
+                                                <img src="{{ $item->temporaryUrl() }}" class="my-4" width="200px"
+                                                    height="200px" alt="Uploaded Image">
+                                            @endforeach
                                         @endif
                                         <br>
                                         @error('image')

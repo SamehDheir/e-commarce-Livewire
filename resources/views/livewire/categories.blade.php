@@ -1,4 +1,4 @@
-    <div wire:poll class="col-lg-12 grid-margin stretch-card">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
@@ -12,7 +12,7 @@
                     <span>{{ $countCategory }}</span>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" wire:poll.keep-alive-4s>
                 @if (session('success'))
                     <div class="alert alert-success" role="alert">
                         {{ session('success') }}
@@ -21,7 +21,7 @@
                 @if ($showTable)
                     <div class="table-responsive">
 
-                        <table class="table">
+                        <table class="table" wire:poll-4s>
                             <thead>
                                 <tr>
                                     <th>#</th>

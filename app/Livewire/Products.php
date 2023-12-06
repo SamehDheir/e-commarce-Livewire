@@ -18,11 +18,15 @@ class Products extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $productIdToEdit;
+    public $search;
     public $name;
     public $price;
     public $rate;
     public $category_id;
+
+    #[Rule(['image.*' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048'])]
     public $image;
+
     public $showTable = true;
 
 
@@ -34,10 +38,14 @@ class Products extends Component
             'price' => 'required|numeric',
             'rate' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imagePath = $this->image->store('images/products', 'public');
+        foreach ($this->image as $item) {
+            $imagePath = $item->store('images/products', 'public');
+        };
+
+
         ModelsProducts::create([
             'name' => $this->name,
             'price' => $this->price,
@@ -90,7 +98,7 @@ class Products extends Component
             'price' => 'required|numeric',
             'rate' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Adjust this based on your needs
+            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Adjust this based on your needs
         ]);
 
         // Delete the old image if a new one is selected
@@ -98,7 +106,7 @@ class Products extends Component
             if ($product->image_path) {
                 Storage::disk('public')->delete($product->image_path);
             }
-            $product->image = $this->image->store('images', 'public');
+            $product->image = $this->image->store('images/products', 'public');
         }
 
         // Update other product information
@@ -117,7 +125,7 @@ class Products extends Component
 
     public function render()
     {
-        $products = ModelsProducts::latest()->paginate(5);
+        $products = ModelsProducts::latest()->where('name', 'like', "%{$this->search}%")->paginate(5);
         $countProduct = ModelsProducts::count();
         $categories = Categories::all();
         $i = 1;

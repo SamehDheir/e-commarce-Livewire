@@ -8,11 +8,12 @@ use Livewire\WithPagination;
 
 class Contact extends Component
 {
+    public $search;
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-   
+
     public function delete($id)
     {
         $contact = ModelsContact::find($id);
@@ -24,7 +25,7 @@ class Contact extends Component
 
     public function render()
     {
-        $contact = ModelsContact::latest()->paginate(5);
+        $contact = ModelsContact::latest()->where('name', 'like', "%{$this->search}%")->paginate(5);
         $i = 1;
         return view('livewire.contact', compact('contact', 'i'));
     }

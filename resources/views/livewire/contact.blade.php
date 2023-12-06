@@ -1,8 +1,17 @@
-    <div wire:poll class="col-lg-12 grid-margin stretch-card">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                <div class="d-flex w-50 justify-content-between">
+                    <div class="w-50 mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" wire:model.live='search'
+                                placeholder="Search Contact Live" aria-label="Recipient's username"
+                                aria-describedby="basic-addon2">
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" wire:poll.keep-alive-4s>
                         <thead>
                             <tr>
                                 <th>#</th>
