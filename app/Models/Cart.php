@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class Cart extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
 
-    public function category()
+    public function products()
     {
-        return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Products::class, 'product_id');
     }
 
-    public function carts()
+    public function users()
     {
-        return $this->hasMany(Cart::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

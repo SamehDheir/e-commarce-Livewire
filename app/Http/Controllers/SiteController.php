@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blogs;
 use App\Models\Categories;
+use App\Models\Comments;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,10 +14,10 @@ class SiteController extends Controller
     public function home()
     {
         $category_first = Categories::get()->first();
-        $categories = Categories::get()->where('id', '!=', $category_first->id)->all();
         $products = Products::all();
-        // $categoryCount = Products::get()->where('id', '=', $categories->id)->count();
+        $categories = Categories::get()->where('id', '!=', $category_first->id)->all();
         return view("site.home", compact("category_first", "categories", "products"));
+        // $categoryCount = Products::get()->where('id', '=', $categories->id)->count();
     }
 
     ////////////

@@ -36,7 +36,7 @@ class Products extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'rate' => 'required|numeric',
+            'rate' => 'required|numeric|min:1|max:5',
             'category_id' => 'required|exists:categories,id',
             // 'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);

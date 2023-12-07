@@ -4,12 +4,20 @@
                 <div class="d-flex justify-content-between">
                     <div>
                         @if ($showTable)
-                            <button wire:click="showForm" class="btn btn-primary">Add Blog</button>
+                            @if ($showComment)
+                                <button wire:click="$set('showComment', false)" class="btn btn-danger">Cancle</button>
+                            @else
+                                <button wire:click="showForm" class="btn btn-primary">Add Blog</button>
+                            @endif
                         @else
                             <button wire:click="$set('showTable', true)" class="btn btn-danger">Cancle</button>
                         @endif
                     </div>
-                    <span>{{ $countblogs }}</span>
+                    @if (!$showComment)
+                        <span>{{ $countblogs }}</span>
+                    @else
+                        <span>{{ $count_blog_comment }}</span>
+                    @endif
                 </div>
             </div>
             <div class="card-body" wire:poll.keep-alive-4s>
@@ -19,105 +27,160 @@
                     </div>
                 @endif
                 @if ($showTable)
-                    <div class="table-responsive">
+                    @if ($showComment)
+                        <div class="col-lg-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    </p>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    {{-- <th>{{ $i++ }}</th> --}}
+                                                    <th> Photo </th>
+                                                    <th> Name </th>
+                                                    <th> Comment </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($blog_comment as $item)
+                                                    <tr>
+                                                        <td class="py-1">
+                                                            <img src="{{ asset('admin/assets/images/faces-clipart/pic-1.png') }}"
+                                                                alt="image" />
+                                                        </td>
+                                                        <td> {{ $item->name }} </td>
+                                                        <td> {{ $item->comment }} </td>
+                                                        <td>
+                                                            <span
+                                                                wire:click.prevent='deleteComment({{ $item->id }})'
+                                                                class="border-1 mx-1 p-2 rounded fs-1 btn-danger">
+                                                                <i class="bi bi-trash"></i>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
 
-                        <table class="table" wire:poll-4s>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Auhter</th>
-                                    <th>Photo</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if ($countblogs > 0)
-                                    @foreach ($blogs as $blog)
-                                        <tr wire:key={{ $blog->id }}>
-                                            <td>{{ $i++ }}</td>
-                                            @if ($blogIdToEdit == $blog->id)
-                                                <td>
-                                                    <input class="form-control mb-2" type="text" wire:model="title">
-                                                    @error('title')
-                                                        <div class="text-danger">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </td>
-                                                <td>
-                                                    <input class="form-control mb-2" type="text"
-                                                        wire:model="description">
-                                                    @error('description')
-                                                        <div class="text-danger">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </td>
-                                                <td>
-                                                    <input class="form-control mb-2" type="text" wire:model="auther">
-                                                    @error('auther')
-                                                        <div class="text-danger">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </td>
-                                                <td>
-                                                    <input type="file" class="mb-2" wire:model='image'>
-                                                    @error('image')
-                                                        <div class="text-danger">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </td>
-                                                <td>
-                                                    <button wire:click='update({{ $blog->id }})' class="btn">
-                                                        <i class="bi bi-check-circle-fill text-success"
-                                                            style="font-size: 20px"></i>
-                                                    </button>
-                                                    <button wire:click='cancleEdit' class="btn">
-                                                        <i class="bi bi-x-circle text-danger"
-                                                            style="font-size: 20px"></i>
-                                                    </button>
-                                                </td>
-                                            @else
-                                                <td>{{ $blog->title }}</td>
-                                                <td>{{ $blog->description }}</td>
-                                                <td>{{ $blog->auther }}</td>
-                                                <td>
-                                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="">
-                                                </td>
-                                                <td>
-                                                    <span wire:click='showComment({{ $blog->id }})'
-                                                        class="border-1 mx-1 p-2 rounded fs-1 btn-warning "
-                                                        style="cursor: pointer">
-                                                        Comments
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span wire:click='delete({{ $blog->id }})'
-                                                        class="border-1 mx-1 p-2 rounded fs-1 btn-danger">
-                                                        <i class="bi bi-trash"></i>
-                                                    </span>
-                                                    <span wire:click.prevent='edit({{ $blog->id }})'
-                                                        class="border-1 mx-1 p-2 rounded fs-1 btn-primary">
-                                                        <i class="bi bi-pencil-square"></i>
-                                                    </span>
-                                                </td>
-                                            @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="table-responsive">
 
-                                        </tr>
-                                    @endforeach
-                                @else
-                                    <tr class="text-center">
-                                        <td colspan="6">No Data Yet 🌝</td>
+                            <table class="table" wire:poll-4s>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Auhter</th>
+                                        <th>Photo</th>
+                                        <th></th>
                                     </tr>
-                                @endif
-                            </tbody>
+                                </thead>
+                                <tbody>
+                                    @if ($countblogs > 0)
+                                        @foreach ($blogs as $blog)
+                                            <tr wire:key={{ $blog->id }}>
+                                                <td>{{ $i++ }}</td>
+                                                @if ($blogIdToEdit == $blog->id)
+                                                    <td>
+                                                        <input class="form-control mb-2" type="text"
+                                                            wire:model="title">
+                                                        @error('title')
+                                                            <div class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control mb-2" type="text"
+                                                            wire:model="description">
+                                                        @error('description')
+                                                            <div class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control mb-2" type="text"
+                                                            wire:model="auther">
+                                                        @error('auther')
+                                                            <div class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </td>
+                                                    <td>
+                                                        <input type="file" class="mb-2" wire:model='image'>
+                                                        @error('image')
+                                                            <div class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </td>
+                                                    <td>
+                                                        <button wire:click='update({{ $blog->id }})'
+                                                            class="btn">
+                                                            <i class="bi bi-check-circle-fill text-success"
+                                                                style="font-size: 20px"></i>
+                                                        </button>
+                                                        <button wire:click='cancleEdit' class="btn">
+                                                            <i class="bi bi-x-circle text-danger"
+                                                                style="font-size: 20px"></i>
+                                                        </button>
+                                                    </td>
+                                                @else
+                                                    <td>{{ $blog->title }}</td>
+                                                    <td>{{ $blog->description }}</td>
+                                                    <td>{{ $blog->auther }}</td>
+                                                    <td>
+                                                        <img src="{{ asset('storage/' . $blog->image) }}"
+                                                            alt="">
+                                                    </td>
+                                                    <td>
+                                                        {{-- @if ($blogIdToShow) --}}
+                                                        <span wire:click.prevent='show_comment({{ $blog->id }})'
+                                                            class="border-1 mx-1 p-2 rounded fs-1 btn-warning "
+                                                            style="cursor: pointer">
+                                                            Comments
+                                                        </span>
+                                                        {{-- @else --}}
+                                                        {{-- <span class="border-1 mx-1 p-2 rounded fs-1 btn-danger "
+                                                                style="cursor: pointer">
+                                                                No Comments
+                                                            </span>
+                                                        @endif --}}
 
-                        </table>
-                    </div>
+                                                    </td>
+                                                    <td>
+                                                        <span wire:click.prevent='delete({{ $blog->id }})'
+                                                            class="border-1 mx-1 p-2 rounded fs-1 btn-danger">
+                                                            <i class="bi bi-trash"></i>
+                                                        </span>
+                                                        <span wire:click.prevent='edit({{ $blog->id }})'
+                                                            class="border-1 mx-1 p-2 rounded fs-1 btn-primary">
+                                                            <i class="bi bi-pencil-square"></i>
+                                                        </span>
+                                                    </td>
+                                                @endif
+
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr class="text-center">
+                                            <td colspan="6">No Data Yet 🌝</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+
+                            </table>
+                        </div>
+                    @endif
                 @else
                     {{-- Add Auther --}}
                     <div class="col-12 grid-margin stretch-card">
@@ -180,12 +243,15 @@
                         </div>
                     </div>
                     {{-- Add Auther --}}
-
                 @endif
 
                 @if ($showTable)
-                    <br />
-                    {{ $blogs->links() }}
+                    @if (!$showComment)
+                        <br />
+                        {{ $blogs->links() }}
+                    @else
+                        {{ $blog_comment->links() }}
+                    @endif
                 @endif
             </div>
         </div>

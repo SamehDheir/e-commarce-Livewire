@@ -23,6 +23,11 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.png') }}" />
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
 
 </head>
 
@@ -345,7 +350,8 @@
                                     <div class="preview-item-content">
                                         <form action="{{ route('admin.logout') }}" method="post">
                                             @csrf
-                                            <button type="submit" class="preview-subject mb-1 border-0 text-light" style="background-color: transparent">Log
+                                            <button type="submit" class="preview-subject mb-1 border-0 text-light"
+                                                style="background-color: transparent">Log
                                                 out</button>
                                         </form>
                                     </div>

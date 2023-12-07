@@ -12,7 +12,7 @@ class Blogs extends Model
     protected $guarded = [];
 
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comments::class);
     }

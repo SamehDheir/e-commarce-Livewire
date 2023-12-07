@@ -17,8 +17,9 @@
                             <div class="blog__item__pic set-bg" data-setbg="{{ asset('storage/' . $blog->image) }}"></div>
                             <div class="blog__item__text">
                                 <h6>
-                                    <form action="{{ route('site.blog.details', $blog->id) }}" method="get">
+                                    <form action="{{ route('site.blog.details', $blog->id) }}" method="post">
                                         @csrf
+                                        @method('GET')
                                         <button type="submit"
                                             style="background-color: transparent; border: 0">{{ $blog->title }}</button>
                                     </form>

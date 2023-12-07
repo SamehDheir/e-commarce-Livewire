@@ -71,14 +71,14 @@ class Categories extends Component
         $this->reset(["categoryIdToEdit", "name", 'description', 'image']);
     }
 
-    public function update($id)
+    public function update()
     {
         $category = ModelsCategories::findOrFail($this->categoryIdToEdit);
 
         $this->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'description' => 'required|string|max:255',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($this->image) {

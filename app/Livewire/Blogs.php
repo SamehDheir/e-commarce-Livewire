@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Blogs as ModelsBlogs;
+use App\Models\Comments;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -17,11 +18,13 @@ class Blogs extends Component
 
     public $blogIdToEdit;
     public $showTable = true;
+    public $showComment = false;
     public $title;
     public $description;
     public $image;
     public $auther;
     public $blogIdToShow;
+
 
     public function create()
     {
@@ -78,7 +81,7 @@ class Blogs extends Component
 
     public function update()
     {
-        $blogs = ModelsBlogs::findOrFail($this->blogIdToEdit);
+        $blogs = ModelsBlogs::findOrfail($this->blogIdToEdit);
 
         $this->validate([
             'title' => 'required|string|max:255',
@@ -104,18 +107,31 @@ class Blogs extends Component
         session()->flash('success', 'blogs updated successfully!');
     }
 
-    // public function showComment($id)
-    // {
-    //     $blogs = ModelsBlogs::findOrfail($id);
-    //     $this->blogIdToShow = $id;
-    // }
+    public function show_comment($id)
+    {
+        $this->blogIdToShow = $id;
+        ModelsBlogs::findOrfail($this->blogIdToShow);
+        $this->showComment = true;
+    }
+
+    public function cancle_comment()
+    {
+        $this->showComment = false;
+    }
+
+    public function deleteComment($id)
+    {
+        Comments::findOrfail($id)->delete();
+    }
 
 
     public function render()
     {
         $blogs = ModelsBlogs::latest()->paginate(5);
+        $blog_comment = Comments::latest()->where('blog_id', '=', $this->blogIdToShow)->paginate(5);
+        $count_blog_comment = Comments::where('blog_id', '=', $this->blogIdToShow)->count();
         $countblogs = ModelsBlogs::count();
         $i = 1;
-        return view('livewire.blogs', compact('blogs', 'i', 'countblogs'));
+        return view('livewire.blogs', compact('blogs', 'blog_comment', 'count_blog_comment', 'i', 'countblogs'));
     }
 }

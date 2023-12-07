@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blogs;
 use App\Models\Categories;
 use App\Models\Contact;
 use App\Models\Products;
@@ -20,6 +21,7 @@ class AdminController extends Controller
             'productCount' => Products::count(),
             'contactCount' => Contact::count(),
             'userCount' => User::count(),
+            'blogsCount' => Blogs::count(),
         ]);
     }
 

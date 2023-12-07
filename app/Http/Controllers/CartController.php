@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blogs;
-use App\Models\Comments;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
-class BlogsController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.tabels.blogs');
+        //
     }
 
     /**
@@ -35,24 +34,15 @@ class BlogsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Cart $cart)
     {
-        $blog = Blogs::find($id);
-
-        if (!$blog) {
-            abort(404, 'Post not found');
-        }
-
-        $blogs_comment = Comments::latest()->where('blog_id', '=', $blog->id)->paginate(5);
-        $count_blog_comment = $blogs_comment->count();
-
-        return view('site.blog-details', compact('blog', 'blogs_comment', 'count_blog_comment'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Blogs $blogs)
+    public function edit(Cart $cart)
     {
         //
     }
@@ -60,7 +50,7 @@ class BlogsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blogs $blogs)
+    public function update(Request $request, Cart $cart)
     {
         //
     }
@@ -68,7 +58,7 @@ class BlogsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Blogs $blogs)
+    public function destroy(Cart $cart)
     {
         //
     }

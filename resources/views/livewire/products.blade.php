@@ -112,7 +112,21 @@
                                             @else
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->price }}</td>
-                                                <td>{{ $item->rate }}</td>
+                                                <td>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <span
+                                                            class="bi bi-star-fill{{ $i <= $item->rate ? ' checked' : '' }}"></span>
+                                                    @endfor
+                                                </td>
+                                                {{-- <td>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <a
+                                                            href="{{ route('products.rate', ['product' => $product, 'rating' => $i]) }}">
+                                                            <span
+                                                                class="fa fa-star{{ $i <= $product->rating ? ' checked' : '' }}"></span>
+                                                        </a>
+                                                    @endfor
+                                                </td> --}}
                                                 <td>
                                                     <img src="{{ asset('storage/' . $item->image) }}" alt="">
                                                 </td>

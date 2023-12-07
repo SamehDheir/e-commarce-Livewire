@@ -11,7 +11,7 @@ class Comments extends Model
 
     protected $guarded = [];
 
-    public function blog()
+    public function blogs()
     {
         return $this->belongsTo(Blogs::class);
     }
