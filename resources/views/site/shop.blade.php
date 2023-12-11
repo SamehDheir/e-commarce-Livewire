@@ -221,217 +221,46 @@
                 </div>
                 <div class="col-lg-9 col-md-9">
                     <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/shop/shop-1.jpg') }}">
-                                    <div class="label new">New</div>
-                                    <ul class="product__hover">
-                                        <li><a href="{{ asset('site/img/shop/shop-1.jpg') }}" class="image-popup"><span
-                                                    class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Furry hooded parka</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
+                        @foreach ($products as $product)
+                            <div class="col-lg-4 col-md-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg"
+                                        data-setbg="{{ asset('storage/' . $product->image) }}">
+                                        <ul class="product__hover">
+                                            <li><a href="{{ asset('storage/' . $product->image) }}"
+                                                    class="image-popup"><span class="arrow_expand"></span></a></li>
+                                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                            <li>
+                                                <form action="{{ route('site.cart.store') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                    @if (Auth::user())
+                                                        <input type="hidden" name="user_id"
+                                                            value="{{ Auth::user()->id }}">
+                                                    @endif
+                                                    <button type="submit"
+                                                        style=" background-color: transparent; border: 0;">
+                                                        <a><span class="icon_bag_alt"></span></a>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <div class="product__price">$ 59.0</div>
+                                    <div class="product__item__text">
+                                        <h6><a href="#">{{ $product->name }}</a></h6>
+                                        <div class="rating">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <span
+                                                    class="bi bi-star-fill{{ $i <= $product->rate ? ' checked' : '' }}"></span>
+                                            @endfor
+                                        </div>
+                                        <div class="product__price">$ {{ $product->price }}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/shop/shop-2.jpg') }}">
-                                    <ul class="product__hover">
-                                        <li><a href="{{ asset('site/img/shop/shop-2.jpg') }}" class="image-popup"><span
-                                                    class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Flowy striped skirt</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 49.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/shop/shop-3.jpg') }}">
-                                    <ul class="product__hover">
-                                        <li><a href="{{ asset('site/img/shop/shop-3.jpg') }}" class="image-popup"><span
-                                                    class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Croc-effect bag</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/shop/shop-4.jpg') }}">
-                                    <ul class="product__hover">
-                                        <li><a href="{{ asset('site/img/shop/shop-4.jpg') }}" class="image-popup"><span
-                                                    class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Dark wash Xavi jeans</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/shop/shop-5.jpg') }}">
-                                    <div class="label">Sale</div>
-                                    <ul class="product__hover">
-                                        <li><a href="{{ asset('site/img/shop/shop-5.jpg') }}" class="image-popup"><span
-                                                    class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Ankle-cuff sandals</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/shop/shop-6.jpg') }}">
-                                    <ul class="product__hover">
-                                        <li><a href="{{ asset('site/img/shop/shop-6.jpg') }}" class="image-popup"><span
-                                                    class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Contrasting sunglasses</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/shop/shop-7.jpg') }}">
-                                    <ul class="product__hover">
-                                        <li><a href="{{ asset('site/img/shop/shop-7.jpg') }}" class="image-popup"><span
-                                                    class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Circular pendant earrings</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/shop/shop-8.jpg') }}">
-                                    <div class="label stockout stockblue">Out Of Stock</div>
-                                    <ul class="product__hover">
-                                        <li><a href="{{ asset('site/img/shop/shop-8.jpg') }}" class="image-popup"><span
-                                                    class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Cotton T-Shirt</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/shop/shop-9.jpg') }}">
-                                    <div class="label">Sale</div>
-                                    <ul class="product__hover">
-                                        <li><a href="{{ asset('site/img/shop/shop-9.jpg') }}" class="image-popup"><span
-                                                    class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Water resistant zips backpack</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+
+
                         <div class="col-lg-12 text-center">
                             <div class="pagination__option">
                                 <a href="#">1</a>

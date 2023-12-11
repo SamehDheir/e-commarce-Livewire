@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductsController;
@@ -51,4 +52,6 @@ Route::prefix('/')->group(function () {
     Route::get('/shop', [SiteController::class, 'shop'])->name('site.shop');
     Route::get('/404', [SiteController::class, 'error_404'])->name('site.error.404');
     Route::get('/500', [SiteController::class, 'error_500'])->name('site.error.500');
+    Route::post('/cart/store', [CartController::class, 'store'])->name('site.cart.store')->middleware('auth');
+    Route::get('/category/{id}', [CategoriesController::class, 'show'])->name('site.category');
 });

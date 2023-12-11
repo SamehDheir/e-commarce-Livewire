@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="{{ asset('site/css/owl.carousel.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('site/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('site/css/style.css') }}" type="text/css">
+
+
 </head>
 
 <body>
@@ -70,8 +72,8 @@
                         <ul>
                             <li class="{{ request()->is('/') ? 'active' : '' }}"><a
                                     href="{{ route('site.home') }}">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
+                            {{-- <li><a href="">Women’s</a></li> --}}
+                            {{-- <li><a href="#">Men’s</a></li> --}}
                             <li class="{{ request()->is('shop') ? 'active' : '' }}"><a
                                     href="{{ route('site.shop') }}">Shop</a></li>
                             <li class="{{ request()->is('cart') || request()->is('checkout') ? 'active' : '' }}"><a
@@ -92,16 +94,41 @@
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            @if (Route::has('login'))
-                                @auth
-                                    <span class="fs-6">{{ Auth::user()->name }}</span>
-                                @else
-                                    <a href="{{ route('login') }}">Login</a>
-                                    @if (Route::has('register'))
-                                        <a href="{{ route('register') }}">Register</a>
+                            <div class="dropdown-container">
+                                <div class="dropdown-trigger">
+                                    @if (Route::has('login'))
+                                        @auth
+                                            <span class="fs-6">{{ Auth::user()->name }}</span>
+                                            <ul class="dropdown-list">
+                                                <li class="dropdown-item">
+                                                    <form action="{{ route('home') }}" method="post">
+                                                        @csrf
+                                                        @method('GET')
+                                                        <button type="submit"
+                                                            style="background-color: transparent; border:0;">Settings</button>
+                                                    </form>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <form action="{{ route('logout') }}" method="post">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            style="background-color: transparent; border:0;">Log
+                                                            out</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        @else
+                                            <a href="{{ route('login') }}">Login</a>
+                                            @if (Route::has('register'))
+                                                <a href="{{ route('register') }}">Register</a>
+                                            @endif
+                                        @endauth
                                     @endif
-                                @endauth
-                            @endif
+                                </div>
+
+                            </div>
+
+
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
@@ -288,6 +315,7 @@
             </form>
         </div>
     </div>
+    @include('sweetalert::alert')
     <!-- Search End -->
 
     <!-- Js Plugins -->

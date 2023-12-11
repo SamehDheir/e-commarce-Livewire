@@ -14,10 +14,10 @@ class SiteController extends Controller
     public function home()
     {
         $category_first = Categories::get()->first();
-        $products = Products::all();
-        $categories = Categories::get()->where('id', '!=', $category_first->id)->all();
-        return view("site.home", compact("category_first", "categories", "products"));
-        // $categoryCount = Products::get()->where('id', '=', $categories->id)->count();
+        $products = Products::latest()->paginate(8);
+        $categories = Categories::get()->where('id', '!=', $category_first->id);
+        $allCategories = Categories::all();
+        return view("site.home", compact("category_first", "categories", "products", "allCategories"));
     }
 
     ////////////

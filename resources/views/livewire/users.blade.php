@@ -37,21 +37,42 @@
                                             <th> Name Product </th>
                                             <th> Quantity </th>
                                             <th> Price </th>
+                                            <th> Total </th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         @foreach ($userCart as $item)
-                                            <tr>
-                                                <th>{{ $i++ }}</th>
-                                                <td class="py-1">
-                                                    <img src="{{ asset('storage/' . $item->products->image) }}"
-                                                        alt="image" />
-                                                </td>
-                                                <td> {{ $item->products->name }} </td>
-                                                <td> {{ $quantity }} </td>
-                                                <td> {{ $item->products->price }} </td>
-                                            </tr>
+                                            @if ($item)
+                                                <tr>
+                                                    <th>{{ $i++ }}</th>
+                                                    <td class="py-1">
+                                                        <img src="{{ asset('storage/' . $item->products->image) }}"
+                                                            alt="image" />
+                                                    </td>
+                                                    <td> {{ $item->products->name }} </td>
+                                                    <td> {{ $quantity + 1 }} </td>
+                                                    <td> {{ $item->products->price }} </td>
+                                                    <td>
+                                                        {{ ($quantity + 1) * $item->products->price }}
+                                                    </td>
+                                                </tr>
+                                            @else
+                                                <tr>
+                                                    <th>{{ $i++ }}</th>
+                                                    <td class="py-1">
+                                                        <img src="{{ asset('storage/' . $item->products->image) }}"
+                                                            alt="image" />
+                                                    </td>
+                                                    <td> {{ $item->products->name }} </td>
+                                                    <td> {{ $quantity }} </td>
+                                                    <td> {{ $item->products->price }} </td>
+                                                    <td>
+                                                        {{ $quantity * $item->products->price }}
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -96,10 +117,6 @@
                         </table>
                     @endif
                 @endif
-
-                {{-- @if ($showTable)
-                    {{ $blog_comment->links() }}
-                @endif --}}
             </div>
         </div>
     </div>

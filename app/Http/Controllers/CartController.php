@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
+
 
 class CartController extends Controller
 {
@@ -28,7 +31,20 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $productId = $request->input('product_id');
+        $userId = $request->input('user_id');
+
+        if ($userId && $productId) {
+            Cart::create([
+                'product_id' => $productId,
+                'user_id' => $userId,
+            ]);
+        } else {
+            return redirect()->route('login');
+        }
+
+        Alert::success('Success Title', 'Success Message');
+        return redirect()->back();
     }
 
     /**

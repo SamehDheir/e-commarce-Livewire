@@ -13,7 +13,13 @@
                         <div class="categories__text">
                             <h1>{{ $category_first->name }}</h1>
                             <p>{{ $category_first->description }}</p>
-                            <a href="#">Shop now</a>
+                            <form action="{{ route('site.category', $category_first->id) }}" method="post">
+                                @csrf
+                                @method('GET')
+                                <a><button type="submit"
+                                        style="background-color: transparent ; border: 0;font-weight: 700">Shop
+                                        Now</button></a>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -24,9 +30,23 @@
                                 <div class="categories__item set-bg"
                                     data-setbg="{{ asset('storage/' . $category->image) }}">
                                     <div class="categories__text">
+
                                         <h4>{{ $category->name }}</h4>
-                                        {{-- <p>{{ $categoryCount }}</p> --}}
-                                        <a href="#">Shop now</a>
+                                        <p>
+                                            {{ $allProducts = App\Models\Products::get()->where('category_id', '=', $category->id)->count() }}
+                                            @if ($allProducts > 1)
+                                                Products
+                                            @else
+                                                Product
+                                            @endif
+                                        </p>
+                                        <form action="{{ route('site.category', $category->id) }}" method="post">
+                                            @csrf
+                                            @method('GET')
+                                            <a><button type="submit"
+                                                    style="background-color: transparent ; border: 0; font-weight: 700">Shop
+                                                    Now</button></a>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +89,18 @@
                                     <li><a href="{{ asset('storage/' . $product->image) }}" class="image-popup"><span
                                                 class="arrow_expand"></span></a></li>
                                     <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                    <li>
+                                        <form action="{{ route('site.cart.store') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            @if (Auth::user())
+                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                            @endif
+                                            <button type="submit" style=" background-color: transparent; border: 0;">
+                                                <a><span class="icon_bag_alt"></span></a>
+                                            </button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
@@ -86,6 +117,7 @@
                 @endforeach
 
             </div>
+            <h5 class="d-block">{{ $products->links('pagination::bootstrap-5') }}</h5>
         </div>
     </section>
     <!-- Product Section End -->
