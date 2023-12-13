@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->foreignId('product_id')->constrained()->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreignId('user_id')->constrained()->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->integer('quantity')->default(1);
             $table->timestamps();
         });
     }

@@ -45,8 +45,8 @@
                             </thead>
                             <tbody>
                                 @if ($countProduct > 0)
-                                    @foreach ($products as $item)
-                                        <tr wire:key={{ $item->id }}>
+                                    @foreach ($products as $index => $item)
+                                        <tr wire:key={{ $index }}>
                                             <td>{{ $i++ }}</td>
 
                                             @if ($productIdToEdit == $item->id)

@@ -47,7 +47,7 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    /**
+    /**٫
      * Display the specified resource.
      */
     public function show(Cart $cart)

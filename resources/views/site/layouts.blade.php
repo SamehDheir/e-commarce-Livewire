@@ -98,10 +98,12 @@
                                 <div class="dropdown-trigger">
                                     @if (Route::has('login'))
                                         @auth
-                                            <span class="fs-6">{{ Auth::user()->name }}</span>
+                                            <img src="{{ auth()->user()->avatar }}" alt="Avatar" width="20"
+                                                height="50">
+                                            <span style="font-size: 13px">{{ Auth::user()->name }}</span>
                                             <ul class="dropdown-list">
                                                 <li class="dropdown-item">
-                                                    <form action="{{ route('home') }}" method="post">
+                                                    <form action="{{ route('dashboard.user') }}" method="post">
                                                         @csrf
                                                         @method('GET')
                                                         <button type="submit"
@@ -130,13 +132,23 @@
 
 
                         </div>
+
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
                             <li><a href="#"><span class="icon_heart_alt"></span>
                                     <div class="tip">2</div>
                                 </a></li>
                             <li><a href="{{ route('site.cart') }}"><span class="icon_bag_alt"></span>
-                                    <div class="tip">2</div>
+                                    <div class="tip">
+                                        @if (Auth::user())
+                                            @php
+                                                $user_id = Auth::user()->id;
+                                            @endphp
+                                            {{ $countItem = App\Models\Cart::where('user_id', $user_id)->count() }}
+                                        @else
+                                            0
+                                        @endif
+                                    </div>
                                 </a></li>
                         </ul>
                     </div>

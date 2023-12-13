@@ -11,7 +11,19 @@
                     <div class="categories__item categories__large__item set-bg"
                         data-setbg="{{ asset('storage/' . $category_first->image) }}">
                         <div class="categories__text">
-                            <h1>{{ $category_first->name }}</h1>
+                            <h1>
+                                @if ($category_first->name == 'Women')
+                                    Women’s fashion
+                                @endif
+                            </h1>
+                            <p>
+                                {{ $allProducts = App\Models\Products::get()->where('category_id', '=', $category_first->id)->count() }}
+                                @if ($allProducts > 1)
+                                    Products
+                                @else
+                                    Product
+                                @endif
+                            </p>
                             <p>{{ $category_first->description }}</p>
                             <form action="{{ route('site.category', $category_first->id) }}" method="post">
                                 @csrf
@@ -31,7 +43,9 @@
                                     data-setbg="{{ asset('storage/' . $category->image) }}">
                                     <div class="categories__text">
 
-                                        <h4>{{ $category->name }}</h4>
+                                        <h4>
+                                            {{ $category->name }}’s fashion
+                                        </h4>
                                         <p>
                                             {{ $allProducts = App\Models\Products::get()->where('category_id', '=', $category->id)->count() }}
                                             @if ($allProducts > 1)
@@ -71,11 +85,14 @@
                 <div class="col-lg-8 col-md-8">
                     <ul class="filter__controls">
                         <li class="active" data-filter="*">All</li>
-                        <li data-filter=".Women">Women’s</li>
-                        <li data-filter=".Men">Men’s</li>
+                        <li data-filter=".{{ $category_first->name }}">{{ $category_first->name }}'s</li>
+                        @foreach ($categories as $category)
+                            <li data-filter=".{{ $category->name }}">{{ $category->name }}'s</li>
+                        @endforeach
+                        {{-- <li data-filter=".Men">Men’s</li>
                         <li data-filter=".Kid">Kid’s</li>
                         <li data-filter=".Accessories">Accessories</li>
-                        <li data-filter=".Cosmetics">Cosmetics</li>
+                        <li data-filter=".Cosmetics">Cosmetics</li> --}}
                     </ul>
                 </div>
             </div>

@@ -33,7 +33,7 @@ class Products extends Component
 
     public function create()
     {
-        $this->validate([
+        $validate = $this->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'rate' => 'required|numeric|min:1|max:5',
@@ -54,6 +54,8 @@ class Products extends Component
             'image' => $imagePath,
         ]);
         $this->showTable = true;
+        $this->reset($validate);
+
         session()->flash('success', 'product updated successfully!');
     }
 

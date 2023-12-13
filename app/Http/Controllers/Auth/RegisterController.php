@@ -64,10 +64,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $avatarUrl = $this->generateAvatarUrl($data['name']);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'avatar' => $avatarUrl,
+
         ]);
+    }
+
+    protected function generateAvatarUrl($name)
+    {
+        // Get the first letter of the name
+        $initial = strtoupper(substr($name, 0, 1));
+
+        // You can customize the URL format as needed
+        $avatarUrl = "https://ui-avatars.com/api/?background=random&name={$initial}";
+
+        return $avatarUrl;
     }
 }

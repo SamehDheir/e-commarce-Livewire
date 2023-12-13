@@ -36,7 +36,8 @@ class SiteController extends Controller
     ////////////
     public function shop()
     {
-        return view("site.shop");
+        $products = Products::latest()->paginate(12);
+        return view("site.shop", compact('products'));
     }
 
     ////////////

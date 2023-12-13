@@ -30,7 +30,7 @@ class Blogs extends Component
     {
         $this->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'auther' => 'required|string|max:255',
         ]);
@@ -85,8 +85,8 @@ class Blogs extends Component
 
         $this->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'required|string',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'auther' => 'required|string|max:255',
         ]);
 
@@ -112,6 +112,7 @@ class Blogs extends Component
         $this->blogIdToShow = $id;
         ModelsBlogs::findOrfail($this->blogIdToShow);
         $this->showComment = true;
+        $this->dispatch('show_blog', array('blog_id' => $this->blogIdToShow));
     }
 
     public function cancle_comment()
@@ -127,8 +128,8 @@ class Blogs extends Component
 
     public function render()
     {
-        $blogs = ModelsBlogs::latest()->paginate(5);
-        $blog_comment = Comments::latest()->where('blog_id', '=', $this->blogIdToShow)->paginate(5);
+        $blogs = ModelsBlogs::latest()->paginate(6);
+        $blog_comment = Comments::latest()->where('blog_id', '=', $this->blogIdToShow)->paginate(6);
         $count_blog_comment = Comments::where('blog_id', '=', $this->blogIdToShow)->count();
         $countblogs = ModelsBlogs::count();
         $i = 1;

@@ -8,6 +8,10 @@
                              <div class="alert alert-success" role="alert">
                                  {{ session('success') }}
                              </div>
+                         @elseif (session('error'))
+                             <div class="alert alert-warning" role="alert">
+                                 {{ session('error') }}
+                             </div>
                          @endif
                          <thead>
                              <tr>
@@ -20,11 +24,11 @@
                          </thead>
                          <tbody>
                              @foreach ($cart as $product)
-                                 @if ($userAuth == $product->user_id)
+                                 @if ($userAuth == $product['user_id'])
                                      <tr>
                                          <td class="cart__product__item">
-                                             <img src="{{ asset('storage/' . $product->products->image) }}" width="100px"
-                                                 height="100px" alt="">
+                                             <img src="{{ asset('storage/' . $product->products->image) }}"
+                                                 width="100px" height="100px" alt="">
                                              <div class="cart__product__item__title">
                                                  <h6>{{ $product->products->name }}</h6>
                                                  <div class="rating">
@@ -35,19 +39,27 @@
                                                  </div>
                                              </div>
                                          </td>
-                                         <td class="cart__price">$ {{ $product->products->price }}</td>
+                                         <td class="cart__price" wire:model='price'>$ {{ $product->products->price }}
+                                         </td>
                                          <td class="cart__quantity">
                                              <div class="pro-qty">
-                                                 <input type="text" value="1">
+                                                 <span wire:click="decreaseQuantity({{ $product['id'] }})"
+                                                     class="dec qtybtn">-</span>
+                                                 <input type="text" wire:model='quantity'
+                                                     value="{{ $product['quantity'] }}">
+                                                 <span wire:click="increaseQuantity({{ $product['id'] }})"
+                                                     class="inc qtybtn">+</span>
                                              </div>
                                          </td>
-                                         <td class="cart__total">$ {{ $product->products->price }}</td>
+                                         <td class="cart__total">
+                                             $ {{ $product->quantity * $product->products->price }}
+                                         </td>
                                          <td class="cart__close"><span wire:click.prevent='delete({{ $product->id }})'
                                                  class="icon_close"></span></td>
                                      </tr>
-                                     <tr>
+                                     {{-- <tr>
                                          <td colspan="5">No Product Yet</td>
-                                     </tr>
+                                     </tr> --}}
                                  @endif
                              @endforeach
 
@@ -82,8 +94,8 @@
                  <div class="cart__total__procced">
                      <h6>Cart total</h6>
                      <ul>
-                         <li>Subtotal <span>$ 750.0</span></li>
-                         <li>Total <span>$ 750.0</span></li>
+                         <li>Subtotal <span>$ {{ $totalPrice }}</span></li>
+                         <li>Total <span>$ {{ $totalPrice }}</span></li>
                      </ul>
                      <a href="#" class="primary-btn">Proceed to checkout</a>
                  </div>

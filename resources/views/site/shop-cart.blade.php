@@ -7,6 +7,6 @@
 
 @section('content')
     <!-- Shop Cart Section Begin -->
-        @livewire('cart')
+    @livewire('cart')
     <!-- Shop Cart Section End -->
 @endsection

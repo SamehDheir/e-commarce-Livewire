@@ -248,9 +248,9 @@
                 @if ($showTable)
                     @if (!$showComment)
                         <br />
-                        {{ $blogs->links() }}
+                        {{ $blogs->links('pagination::bootstrap-5') }}
                     @else
-                        {{ $blog_comment->links() }}
+                        {{ $blog_comment->links('pagination::bootstrap-5') }}
                     @endif
                 @endif
             </div>

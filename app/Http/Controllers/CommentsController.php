@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Comments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CommentsController extends Controller
 {
@@ -26,9 +28,16 @@ class CommentsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $blog_id)
     {
-        //
+        Comments::create([
+            'name' => Auth::user()->name,
+            'comment' => $request->comment,
+            'blog_id' => $blog_id,
+            'image' => null,
+        ]);
+        Alert::success('Success Comment', 'Comment Successfuly Added');
+        return redirect()->back();
     }
 
     /**

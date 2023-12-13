@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SiteController;
@@ -22,9 +23,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/dashboard-user', [App\Http\Controllers\HomeController::class, 'dashboardUser'])->name('dashboard.user')->middleware('verified');
+Auth::routes(['verify' => true]);
 
 
 
@@ -44,14 +46,15 @@ Route::prefix('/admin')->group(function () {
 Route::prefix('/')->group(function () {
     Route::get('/', [SiteController::class, 'home'])->name('site.home');
     Route::get('/product-details', [SiteController::class, 'product_details'])->name('site.product.details');
-    Route::get('/cart', [SiteController::class, 'cart'])->name('site.cart')->middleware('auth');
+    Route::get('/cart', [SiteController::class, 'cart'])->name('site.cart')->middleware('auth', 'verified');
     Route::get('/blog', [SiteController::class, 'blog'])->name('site.blog');
-    Route::get('/checkout', [SiteController::class, 'checkout'])->name('site.checkout')->middleware('auth');
+    Route::get('/checkout', [SiteController::class, 'checkout'])->name('site.checkout')->middleware('auth', 'verified');
     Route::get('/contact', [SiteController::class, 'contact'])->name('site.contact');
     Route::get('/blog-details/{id}', [BlogsController::class, 'show'])->name('site.blog.details');
     Route::get('/shop', [SiteController::class, 'shop'])->name('site.shop');
     Route::get('/404', [SiteController::class, 'error_404'])->name('site.error.404');
     Route::get('/500', [SiteController::class, 'error_500'])->name('site.error.500');
-    Route::post('/cart/store', [CartController::class, 'store'])->name('site.cart.store')->middleware('auth');
+    Route::post('/cart/store', [CartController::class, 'store'])->name('site.cart.store')->middleware('auth', 'verified');
     Route::get('/category/{id}', [CategoriesController::class, 'show'])->name('site.category');
+    Route::post('/comment/{blog_id}', [CommentsController::class, 'store'])->name('site.comment.add');
 });

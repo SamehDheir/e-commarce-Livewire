@@ -33,7 +33,7 @@
                     </div>
                 @endforeach
             </div>
-            {{ $blogs->links('pagination::bootstrap-4') }}
+            {{ $blogs->links('pagination::bootstrap-5') }}
         </div>
     </section>
     <!-- Blog Section End -->

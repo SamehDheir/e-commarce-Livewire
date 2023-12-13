@@ -6,40 +6,13 @@
 
 
 @section('content')
-
-
     <!-- Product Details Section Begin -->
     <section class="product-details spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="product__details__pic">
-                        <div class="product__details__pic__left product__thumb nice-scroll">
-                            <a class="pt active" href="#product-1">
-                                <img src="{{ asset('site/img/product/details/thumb-1.jpg') }}" alt="">
-                            </a>
-                            <a class="pt" href="#product-2">
-                                <img src="{{ asset('site/img/product/details/thumb-2.jpg') }}" alt="">
-                            </a>
-                            <a class="pt" href="#product-3">
-                                <img src="{{ asset('site/img/product/details/thumb-3.jpg') }}" alt="">
-                            </a>
-                            <a class="pt" href="#product-4">
-                                <img src="{{ asset('site/img/product/details/thumb-4.jpg') }}" alt="">
-                            </a>
-                        </div>
-                        <div class="product__details__slider__content">
-                            <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-1" class="product__big__img" src="{{ asset('site/img/product/details/product-1.jpg') }}"
-                                    alt="">
-                                <img data-hash="product-2" class="product__big__img" src="{{ asset('site/img/product/details/product-3.jpg') }}"
-                                    alt="">
-                                <img data-hash="product-3" class="product__big__img" src="{{ asset('site/img/product/details/product-2.jpg') }}"
-                                    alt="">
-                                <img data-hash="product-4" class="product__big__img" src="{{ asset('site/img/product/details/product-4.jpg') }}"
-                                    alt="">
-                            </div>
-                        </div>
+                       <img src="{{ asset('site/img/product/details/product-1.jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -193,7 +166,8 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/product/related/rp-1.jpg') }}">
+                        <div class="product__item__pic set-bg"
+                            data-setbg="{{ asset('site/img/product/related/rp-1.jpg') }}">
                             <div class="label new">New</div>
                             <ul class="product__hover">
                                 <li><a href="{{ asset('site/img/product/related/rp-1.jpg') }}" class="image-popup"><span
@@ -217,7 +191,8 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/product/related/rp-2.jpg') }}">
+                        <div class="product__item__pic set-bg"
+                            data-setbg="{{ asset('site/img/product/related/rp-2.jpg') }}">
                             <ul class="product__hover">
                                 <li><a href="{{ asset('site/img/product/related/rp-2.jpg') }}" class="image-popup"><span
                                             class="arrow_expand"></span></a></li>
@@ -240,7 +215,8 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/product/related/rp-3.jpg') }}">
+                        <div class="product__item__pic set-bg"
+                            data-setbg="{{ asset('site/img/product/related/rp-3.jpg') }}">
                             <div class="label stockout">out of stock</div>
                             <ul class="product__hover">
                                 <li><a href="{{ asset('site/img/product/related/rp-3.jpg') }}" class="image-popup"><span
@@ -264,7 +240,8 @@
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="{{ asset('site/img/product/related/rp-4.jpg') }}">
+                        <div class="product__item__pic set-bg"
+                            data-setbg="{{ asset('site/img/product/related/rp-4.jpg') }}">
                             <ul class="product__hover">
                                 <li><a href="{{ asset('site/img/product/related/rp-4.jpg') }}" class="image-popup"><span
                                             class="arrow_expand"></span></a></li>
