@@ -91,8 +91,8 @@ class Blogs extends Component
         ]);
 
         if ($this->image) {
-            if ($blogs->image_path) {
-                Storage::disk('public')->delete($blogs->image_path);
+            if ($blogs->image) {
+                Storage::disk('public')->delete($blogs->image);
             }
             $blogs->image = $this->image->store('images', 'public');
         }

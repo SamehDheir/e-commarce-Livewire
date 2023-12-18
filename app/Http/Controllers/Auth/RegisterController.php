@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Notifications\UserRegistered;
+use Illuminate\Support\Str;
+
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -65,13 +68,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $avatarUrl = $this->generateAvatarUrl($data['name']);
-        return User::create([
+
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'avatar' => $avatarUrl,
 
         ]);
+        $user->confirmation_token = Str::uuid();
+        $user->save();
+
+        $user->notify(new UserRegistered());
+        return $user;
     }
 
     protected function generateAvatarUrl($name)

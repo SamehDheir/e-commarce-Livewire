@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('rate')->nullable();
             $table->string('image')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->enum('size', ['XL', 'L', 'M', 'S'])->default('L');
+            $table->string('availability')->default('stock');
+            $table->enum('color', ['red', 'black', 'gray'])->default('black');
             $table->timestamps();
         });
     }

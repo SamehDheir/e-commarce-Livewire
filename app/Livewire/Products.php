@@ -33,7 +33,7 @@ class Products extends Component
 
     public function create()
     {
-        $validate = $this->validate([
+        $this->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'rate' => 'required|numeric|min:1|max:5',
@@ -54,7 +54,7 @@ class Products extends Component
             'image' => $imagePath,
         ]);
         $this->showTable = true;
-        $this->reset($validate);
+        $this->reset('name','price','rate','category_id','image');
 
         session()->flash('success', 'product updated successfully!');
     }
@@ -105,8 +105,8 @@ class Products extends Component
 
         // Delete the old image if a new one is selected
         if ($this->image) {
-            if ($product->image_path) {
-                Storage::disk('public')->delete($product->image_path);
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
             }
             $product->image = $this->image->store('images/products', 'public');
         }

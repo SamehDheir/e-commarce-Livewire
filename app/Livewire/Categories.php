@@ -82,8 +82,8 @@ class Categories extends Component
         ]);
 
         if ($this->image) {
-            if ($category->image_path) {
-                Storage::disk('public')->delete($category->image_path);
+            if ($category->image) {
+                Storage::disk('public')->delete($category->image);
             }
             $category->image = $this->image->store('images', 'public');
         }

@@ -38,6 +38,10 @@ class CartController extends Controller
             Cart::create([
                 'product_id' => $productId,
                 'user_id' => $userId,
+                'quantity' => $request->input('quantity'),
+                'size' => $request->input('size'),
+                'availability' => $request->input('availability'),
+                'color' => $request->input('color'),
             ]);
         } else {
             return redirect()->route('login');

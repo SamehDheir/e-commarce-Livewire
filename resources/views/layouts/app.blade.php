@@ -74,7 +74,8 @@
 
                             </li>
                             <li>
-                                <img src="{{ auth()->user()->avatar }}" alt="Avatar" width="50" height="50">
+                                <img src="{{ asset('storage/' . Auth::user()->avatar) ? asset('storage/' . Auth::user()->avatar) : auth()->user()->avatar }}"
+                                    alt="Avatar" width="50" height="50">
                             </li>
                         @endguest
                     </ul>

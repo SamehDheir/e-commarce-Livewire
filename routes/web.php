@@ -45,7 +45,7 @@ Route::prefix('/admin')->group(function () {
 // Site Route
 Route::prefix('/')->group(function () {
     Route::get('/', [SiteController::class, 'home'])->name('site.home');
-    Route::get('/product-details', [SiteController::class, 'product_details'])->name('site.product.details');
+    Route::get('/product-details/{id}', [SiteController::class, 'product_details'])->name('site.product.details');
     Route::get('/cart', [SiteController::class, 'cart'])->name('site.cart')->middleware('auth', 'verified');
     Route::get('/blog', [SiteController::class, 'blog'])->name('site.blog');
     Route::get('/checkout', [SiteController::class, 'checkout'])->name('site.checkout')->middleware('auth', 'verified');
@@ -57,4 +57,10 @@ Route::prefix('/')->group(function () {
     Route::post('/cart/store', [CartController::class, 'store'])->name('site.cart.store')->middleware('auth', 'verified');
     Route::get('/category/{id}', [CategoriesController::class, 'show'])->name('site.category');
     Route::post('/comment/{blog_id}', [CommentsController::class, 'store'])->name('site.comment.add');
+    Route::get('/confirm/{token}', 'ConfirmationController@confirm');
+});
+
+Route::controller(GoogleController::class)->group(function () {
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'handleGoogleCallback');
 });

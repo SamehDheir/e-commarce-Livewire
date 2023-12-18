@@ -78,7 +78,7 @@
                                     <tr>
                                         <td>{{ $i++ }}</td>
                                         <td class="py-1">
-                                            <img src="{{ asset('admin/assets/images/faces-clipart/pic-1.png') }}"
+                                            <img src="{{$user->avatar}}"
                                                 alt="image" />
                                         </td>
                                         <td> {{ $user->name }} </td>

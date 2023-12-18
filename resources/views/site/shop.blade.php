@@ -41,7 +41,6 @@
                                                                 </a>
                                                             </li>
                                                         @endforeach
-
                                                     </ul>
                                                 </div>
                                             </div>
@@ -191,7 +190,15 @@
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a href="#">{{ $product->name }}</a></h6>
+                                        <form action="{{ route('site.product.details', $product->id) }}" method="post">
+                                            @csrf
+                                            @method('GET')
+                                            <button type="submit" style="background-color: transparent; border: 0">
+                                                <h6>
+                                                    {{ $product->name }}
+                                                </h6>
+                                            </button>
+                                        </form>
                                         <div class="rating">
                                             @for ($i = 1; $i <= 5; $i++)
                                                 <span
