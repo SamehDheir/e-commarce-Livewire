@@ -114,9 +114,13 @@
                     <form wire:submit.prevent='changePhoto' method="post">
                         @if ($avatar)
                             <img src="{{ $avatar->temporaryUrl() }}" class="my-4" width="200px">
-                        @else
+                        @elseif (file_exists(public_path('storage/' . Auth::user()->avatar)))
                             <img src="{{ asset('storage/' . Auth::user()->avatar) }}" class="my-4" width="200px">
+                        @else
+                            <img src="{{ Auth::user()->avatar }}" alt="Avatar" width="50" height="50">
                         @endif
+
+                       
                         <input type="file" wire:model='avatar' class="form-control">
                         @error('avatar')
                             <div class="text-danger my-1">

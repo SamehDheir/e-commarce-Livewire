@@ -74,8 +74,15 @@
 
                             </li>
                             <li>
-                                <img src="{{ asset('storage/' . Auth::user()->avatar) ? asset('storage/' . Auth::user()->avatar) : auth()->user()->avatar }}"
-                                    alt="Avatar" width="50" height="50">
+                                @if (file_exists(public_path('storage/' . Auth::user()->avatar)))
+                                    <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar" width="50"
+                                        height="50">
+                                        @else
+                                         <img src="{{Auth::user()->avatar }}" alt="Avatar" width="50"
+                                        height="50">
+                                @endif
+
+
                             </li>
                         @endguest
                     </ul>
