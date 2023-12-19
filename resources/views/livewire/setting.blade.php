@@ -10,7 +10,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    Welcome <span class="text-primary">{{ Auth::user()->name }}</span>
+                    Welcome To <span class="text-primary">{{ Auth::user()->name }}</span>
 
                 </div>
             </div>
@@ -19,14 +19,13 @@
             <div class="card mt-3">
                 <div class="card-header">{{ __('UserName') }}</div>
                 <div class="card-body" wire:poll.keep-alive-9s>
-                    @if (session('successUserName'))
+                    {{-- @if (session('successUserName'))
                         <div class="alert alert-success">
                             {{ session('successUserName') }}
                         </div>
-                    @endif
+                    @endif --}}
                     <form wire:submit.prevent='changeUserName' method="post">
-                        <input type="text" wire:model='username' class="form-control"
-                            value="{{ Auth::user()->name }}">
+                        <input type="text" wire:model='username' class="form-control">
                         @error('username')
                             <div class="text-danger my-1">
                                 {{ $message }}
@@ -43,13 +42,13 @@
             <div class="card mt-3">
                 <div class="card-header">{{ __('Email') }}</div>
                 <div class="card-body" wire:poll.keep-alive-9s>
-                    @if (session('successEmail'))
+                    {{-- @if (session('successEmail'))
                         <div class="alert alert-success">
                             {{ session('successEmail') }}
                         </div>
-                    @endif
+                    @endif --}}
                     <form wire:submit.prevent='changeEmail' method="post">
-                        <input type="email" wire:model='email' class="form-control" value="{{ Auth::user()->email }}">
+                        <input type="email" wire:model='email' class="form-control">
                         @error('email')
                             <div class="text-danger my-1">
                                 {{ $message }}
@@ -63,16 +62,16 @@
             {{-- Email --}}
 
             {{-- Password --}}
-            <div class="card mt-3">
+            <div class="card mt-3" wire:poll.keep-alive-9s>
                 <div class="card-header">{{ __('Password') }}</div>
                 <div class="card-body">
-                    @if (session('successPassword'))
+                    {{-- @if (session('successPassword'))
                         <div class="alert alert-success">
                             {{ session('successPassword') }}
                         </div>
-                    @endif
+                    @endif --}}
                     <form wire:submit.prevent='changePassword' method="post">
-                        <label>Current Password</label>
+                        <label class="my-2">Current Password</label>
                         <input type="password" wire:model='currentPassword' class="form-control">
                         @error('currentPassword')
                             <div class="text-danger my-1">
@@ -80,21 +79,16 @@
                             </div>
                         @enderror
 
-                        <label>New Password</label>
-                        <input type="password" wire:model=newPassword' class="form-control">
+                        <label class="my-2">New Password</label>
+                        <input type="password" wire:model='newPassword' class="form-control">
                         @error('newPassword')
                             <div class="text-danger my-1">
                                 {{ $message }}
                             </div>
                         @enderror
 
-                        <label>Confirm Password</label>
+                        <label class="my-2">Confirm Password</label>
                         <input type="password" wire:model='confirmPassword' class="form-control">
-                        @error('confirmPassword')
-                            <div class="text-danger my-1">
-                                {{ $message }}
-                            </div>
-                        @enderror
                         <button type="submit" class="btn btn-primary mt-2">Change</button>
                     </form>
 
@@ -106,11 +100,11 @@
             <div class="card mt-3">
                 <div class="card-header">{{ __('Photo') }}</div>
                 <div class="card-body" wire:poll.keep-alive-9s>
-                    @if (session('successPhoto'))
+                    {{-- @if (session('successPhoto'))
                         <div class="alert alert-success">
                             {{ session('successPhoto') }}
                         </div>
-                    @endif
+                    @endif --}}
                     <form wire:submit.prevent='changePhoto' method="post">
                         @if ($avatar)
                             <img src="{{ $avatar->temporaryUrl() }}" class="my-4" width="200px">
@@ -120,7 +114,7 @@
                             <img src="{{ Auth::user()->avatar }}" alt="Avatar" width="50" height="50">
                         @endif
 
-                       
+
                         <input type="file" wire:model='avatar' class="form-control">
                         @error('avatar')
                             <div class="text-danger my-1">

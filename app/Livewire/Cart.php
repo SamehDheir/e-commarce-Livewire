@@ -75,7 +75,8 @@ class Cart extends Component
 
         if ($productCart) {
             $productCart->delete();
-            session()->flash('success', 'Product Cart deleted successfully!');
+            // session()->flash('success', 'Product Cart deleted successfully!');
+            toastr()->success('Delete product successfully', ['timeOut' => 2000]);
         }
     }
     public function render()

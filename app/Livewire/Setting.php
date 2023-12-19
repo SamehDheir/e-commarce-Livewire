@@ -16,12 +16,18 @@ class Setting extends Component
     use WithFileUploads;
 
 
-    public $email;
     public $username;
+    public $email;
     public $currentPassword;
     public $newPassword;
     public $confirmPassword;
     public $avatar;
+
+    public function mount()
+    {
+        $this->username = Auth::user()->name;
+        $this->email = Auth::user()->email;
+    }
 
     public function changeUserName()
     {
@@ -31,7 +37,9 @@ class Setting extends Component
         $user = User::findOrFail(Auth::user()->id);
         $user->name = $this->username;
         $user->save();
-        session()->flash('successUserName', 'Change Username Successfully');
+        // session()->flash('successUserName', 'Change Username Successfully');
+        toastr()->success('Change Username Successfully', ['timeOut' => 2000]);
+
         return redirect()->back();
     }
 
@@ -43,26 +51,35 @@ class Setting extends Component
         $user = User::findOrFail(Auth::user()->id);
         $user->email = $this->email;
         $user->save();
-        session()->flash('successEmail', 'Change Email Addresss Successfully');
+        // session()->flash('successEmail', 'Change Email Addresss Successfully');
+        toastr()->success('Change Email Addresss Successfully', ['timeOut' => 2000]);
+
         return redirect()->back();
     }
 
     public function changePassword()
     {
-        // $this->validate([
-        //     'currentPassword' => 'required',
-        //     'newPassword' => 'required|confirmed|min:8',
-        // ]);
+        $this->validate([
+            'currentPassword' => 'required',
+            'newPassword' => 'required:min:8',
+        ]);
 
-        $user = User::findOrFail(Auth::user()->id);
-        if (Hash::check($this->currentPassword, $user->password)) {
+        if (!Hash::check($this->currentPassword, Auth::user()->password)) {
+            $this->addError('currentPassword', 'The current password is incorrect.');
+            return;
+        } else {
+            $user = User::findOrfail(Auth::user()->id);
             $user->update([
                 'password' => Hash::make($this->newPassword),
             ]);
-            session()->flash('successPassword', 'Change Password Successfully');
-            $user->logout();
         }
-        return redirect()->back();
+
+        $this->currentPassword = '';
+        $this->newPassword = '';
+        $this->confirmPassword = '';
+
+        // session()->flash('successPassword', 'Password changed successfully.');
+        toastr()->success('Password changed successfully', ['timeOut' => 2000]);
     }
 
     public function changePhoto()
@@ -78,7 +95,9 @@ class Setting extends Component
             $user->avatar = $this->avatar->store('images/users', 'public');
         }
         $user->save();
-        session()->flash('successPhoto', 'Change Photo Successfully');
+        // session()->flash('successPhoto', 'Change Photo Successfully');
+        toastr()->success('Change Photo Successfully', ['timeOut' => 2000]);
+
         return redirect()->back();
     }
 

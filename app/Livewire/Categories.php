@@ -37,7 +37,8 @@ class Categories extends Component
         ]);
         $this->showTable = true;
         $this->reset('name', 'description', 'image');
-        session()->flash('success', 'category updated successfully!');
+        // session()->flash('success', 'category updated successfully!');
+        toastr()->success('Category Created successfully', ['timeOut' => 2000]);
     }
 
 
@@ -54,7 +55,8 @@ class Categories extends Component
         }
         if ($category) {
             $category->delete();
-            session()->flash('success', 'Category deleted successfully!');
+            // session()->flash('success', 'Category deleted successfully!');
+            toastr()->success('Category deleted successfully', ['timeOut' => 2000]);
         }
     }
 
@@ -94,7 +96,8 @@ class Categories extends Component
         $category->save();
 
         $this->cancleEdit();
-        session()->flash('success', 'category updated successfully!');
+        // session()->flash('success', 'category updated successfully!');
+        toastr()->success('Category updated successfully', ['timeOut' => 2000]);
     }
 
 

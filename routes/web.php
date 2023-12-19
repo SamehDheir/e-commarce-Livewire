@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserController;
@@ -60,6 +61,7 @@ Route::prefix('/')->group(function () {
     Route::get('/confirm/{token}', 'ConfirmationController@confirm');
 });
 
+// Social Login
 Route::controller(GoogleController::class)->group(function () {
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
     Route::get('auth/google/callback', 'handleGoogleCallback');

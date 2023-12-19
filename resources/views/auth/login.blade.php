@@ -57,9 +57,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex items-center justify-end mt-4 align-middle ">
+                            <div class="d-flex align-items-center mt-4 bg-light m-auto my-3" style="width: 30%">
                                 <a href="{{ route('auth.google') }}">
-                                    <i class="bi bi-google"></i>
+                                    <i class="fa-brands fa-google fs-1 bg-danger text-light p-3 rounded-pill"></i>
                                 </a>
                             </div>
 

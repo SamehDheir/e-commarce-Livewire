@@ -19,7 +19,9 @@ class Contact extends Component
         $contact = ModelsContact::find($id);
         if ($contact) {
             $contact->delete();
-            session()->flash('success', 'Contact deleted successfully!');
+            // session()->flash('success', 'Contact deleted successfully!');
+            toastr()->success('Contact deleted successfully', ['timeOut' => 2000]);
+
         }
     }
 

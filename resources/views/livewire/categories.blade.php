@@ -13,11 +13,11 @@
                 </div>
             </div>
             <div class="card-body" wire:poll.keep-alive-4s>
-                @if (session('success'))
+                {{-- @if (session('success'))
                     <div class="alert alert-success" role="alert">
                         {{ session('success') }}
                     </div>
-                @endif
+                @endif --}}
                 @if ($showTable)
                     <div class="table-responsive">
 

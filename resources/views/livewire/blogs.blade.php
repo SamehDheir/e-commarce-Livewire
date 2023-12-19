@@ -21,11 +21,11 @@
                 </div>
             </div>
             <div class="card-body" wire:poll.keep-alive-4s>
-                @if (session('success'))
+                {{-- @if (session('success'))
                     <div class="alert alert-success" role="alert">
                         {{ session('success') }}
                     </div>
-                @endif
+                @endif --}}
                 @if ($showTable)
                     @if ($showComment)
                         <div class="col-lg-12 grid-margin stretch-card">

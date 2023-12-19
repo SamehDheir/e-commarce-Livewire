@@ -17,6 +17,9 @@
                              <tr>
                                  <th>Product</th>
                                  <th>Price</th>
+                                 <th>Size</th>
+                                 <th>Availability</th>
+                                 <th>Color</th>
                                  <th>Quantity</th>
                                  <th>Total</th>
                                  <th></th>
@@ -39,7 +42,14 @@
                                                  </div>
                                              </div>
                                          </td>
-                                         <td class="cart__price" wire:model='price'>$ {{ $product->products->price }}
+                                         <td class="cart__price" wire:model='price'> $ {{ $product->products->price }}
+                                         <td class="cart__price" wire:model='size'>{{ $product->products->size }}
+                                         <td class="cart__price" wire:model='availability'>
+                                             {{ $product->products->availability }}
+                                         <td class="cart__price" wire:model='color'>
+                                             <div
+                                                 style="width: 50px; height: 50px; background-color: {{ $product->products->color }} ;">
+                                             </div>
                                          </td>
                                          <td class="cart__quantity">
                                              <div class="pro-qty">

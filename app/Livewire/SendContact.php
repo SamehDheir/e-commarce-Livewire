@@ -25,7 +25,8 @@ class SendContact extends Component
 
         $this->reset(["name", 'email', 'subject', 'message']);
 
-        session()->flash("success", "Sent message successfully.");
+        // session()->flash("success", "Sent message successfully.");
+        toastr()->success('Sent message successfully', ['timeOut' => 2000]);
     }
 
     public function render()

@@ -1,10 +1,10 @@
     <div class="contact__form">
         <h5>SEND MESSAGE</h5>
-        @if (session('success'))
+        {{-- @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
-        @endif
+        @endif --}}
         <form wire:submit.prevent='create'>
             <input type="text" wire:model='name' placeholder="Name" />
             @error('name')

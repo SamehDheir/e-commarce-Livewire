@@ -35,19 +35,23 @@ class CartController extends Controller
         $userId = $request->input('user_id');
 
         if ($userId && $productId) {
-            Cart::create([
+            $cart = Cart::create([
                 'product_id' => $productId,
                 'user_id' => $userId,
-                'quantity' => $request->input('quantity'),
-                'size' => $request->input('size'),
-                'availability' => $request->input('availability'),
-                'color' => $request->input('color'),
             ]);
+            if ($request->input('size') || $request->input('availability') || $request->input('color') || $request->input('quantity')) {
+                $cart->size = $request->input('size');
+                $cart->availability = $request->input('availability');
+                $cart->color = $request->input('color');
+                $cart->quantity = $request->input('quantity');
+            }
+            $cart->save();
         } else {
             return redirect()->route('login');
         }
 
-        Alert::success('Success Title', 'Success Message');
+        // Alert::success('Success Title', 'Success Message');
+        toastr()->success('Added to cart successfully', ['timeOut' => 3000]);
         return redirect()->back();
     }
 

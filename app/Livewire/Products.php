@@ -54,9 +54,11 @@ class Products extends Component
             'image' => $imagePath,
         ]);
         $this->showTable = true;
-        $this->reset('name','price','rate','category_id','image');
+        $this->reset('name', 'price', 'rate', 'category_id', 'image');
 
-        session()->flash('success', 'product updated successfully!');
+        // session()->flash('success', 'product updated successfully!');
+
+        toastr()->success('Product updated successfully', ['timeOut' => 2000]);
     }
 
     public function showForm()
@@ -73,7 +75,8 @@ class Products extends Component
         }
         if ($product) {
             $product->delete();
-            session()->flash('success', 'Product deleted successfully!');
+            // session()->flash('success', 'Product deleted successfully!');
+            toastr()->success('Product deleted successfully', ['timeOut' => 2000]);
         }
     }
 
@@ -121,7 +124,8 @@ class Products extends Component
 
 
         $this->cancleEdit();
-        session()->flash('success', 'product updated successfully!');
+        // session()->flash('success', 'product updated successfully!');
+        toastr()->success('product updated successfully', ['timeOut' => 2000]);
     }
 
 

@@ -44,7 +44,9 @@ class Blogs extends Component
         ]);
         $this->showTable = true;
         $this->reset('title', 'description', 'image', 'auther');
-        session()->flash('success', 'blogs updated successfully!');
+
+        // session()->flash('success', 'blogs updated successfully!');
+        toastr()->success('Blog updated successfully', ['timeOut' => 2000]);
     }
 
 
@@ -61,7 +63,8 @@ class Blogs extends Component
         }
         if ($blogs) {
             $blogs->delete();
-            session()->flash('success', 'blogs deleted successfully!');
+            // session()->flash('success', 'blog deleted successfully!');
+            toastr()->success('Blog deleted successfully', ['timeOut' => 2000]);
         }
     }
 
@@ -104,7 +107,8 @@ class Blogs extends Component
         $blogs->save();
 
         $this->cancleEdit();
-        session()->flash('success', 'blogs updated successfully!');
+        // session()->flash('success', 'blog updated successfully!');
+        toastr()->success('Blog updated successfully', ['timeOut' => 2000]);
     }
 
     public function show_comment($id)
@@ -123,6 +127,7 @@ class Blogs extends Component
     public function deleteComment($id)
     {
         Comments::findOrfail($id)->delete();
+        toastr()->success('Comment deleted successfully', ['timeOut' => 2000]);
     }
 
 
