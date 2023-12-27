@@ -12,8 +12,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
+         $selectedSizes = $request->input('sizes', []);
         return view('admin.tabels.products');
     }
+
 
     /**
      * Show the form for creating a new resource.
