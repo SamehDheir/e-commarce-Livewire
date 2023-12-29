@@ -101,6 +101,13 @@ class Setting extends Component
         return redirect()->back();
     }
 
+    public function deleteAcount(){
+        $user = User::findOrFail(Auth::user()->id);
+        $user->delete();
+        toastr()->success('Delete Acount Successfully', ['timeOut' => 2000]);
+        return redirect()->route('home');
+    }
+
 
     public function render()
     {

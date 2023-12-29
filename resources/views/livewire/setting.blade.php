@@ -128,6 +128,18 @@
             </div>
             {{-- Image --}}
 
+            {{-- Image --}}
+            <div class="card mt-3">
+                <div class="card-header">Delete Acount</div>
+                <div class="card-body">
+                    <h5>{{ Auth::user()->email }}</h5>
+                    <form wire:submit.prevent='deleteAcount({{ Auth::user()->id }})' method="post">
+                        <button type="submit" class="btn btn-danger mt-2">DELETE</button>
+                    </form>
+                </div>
+            </div>
+            {{-- Image --}}
+
 
         </div>
     </div>
