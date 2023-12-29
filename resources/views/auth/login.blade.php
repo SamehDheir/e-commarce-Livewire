@@ -56,21 +56,16 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- Register by Goole --}}
+
                         <div class="d-flex align-items-center mt-4 bg-light m-auto my-3" style="width: 30%">
                             <a href="{{ route('auth.google') }}">
                                 <i class="fa-brands fa-google fs-1 bg-danger text-light p-3 rounded-pill"></i>
                             </a>
-                        </div>
-                        {{-- Register by Goole --}}
-                        
-                        {{-- Register by facebook --}}
-                        <div class="d-flex align-items-center mt-4 bg-light m-auto my-3" style="width: 30%">
                             <a href="{{ route('auth.facebook') }}">
-                                <i class="fa-brands fa-facebook fs-1 bg-danger text-light p-3 rounded-pill"></i>
+                                <i class="fa-brands fa-facebook fs-1 bg-primary ms-3 text-light p-3 rounded-pill"></i>
                             </a>
                         </div>
-                        {{-- Register by facebook --}}
+
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
