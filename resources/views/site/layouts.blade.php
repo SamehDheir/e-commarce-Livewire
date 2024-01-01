@@ -97,34 +97,33 @@
                             <div class="dropdown-container">
                                 <div class="dropdown-trigger">
                                     @if (Route::has('login'))
-                                        @auth
-                                            <img src="{{ auth()->user()->avatar }}" alt="Avatar" width="20"
-                                                height="50">
-                                            <span style="font-size: 13px">{{ Auth::user()->name }}</span>
-                                            <ul class="dropdown-list">
-                                                <li class="dropdown-item">
-                                                    <form action="{{ route('dashboard.user') }}" method="post">
-                                                        @csrf
-                                                        @method('GET')
-                                                        <button type="submit"
-                                                            style="background-color: transparent; border:0;">Settings</button>
-                                                    </form>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <form action="{{ route('logout') }}" method="post">
-                                                        @csrf
-                                                        <button type="submit"
-                                                            style="background-color: transparent; border:0;">Log
-                                                            out</button>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        @else
-                                            <a href="{{ route('login') }}">Login</a>
-                                            @if (Route::has('register'))
-                                                <a href="{{ route('register') }}">Register</a>
-                                            @endif
-                                        @endauth
+                                    @auth
+                                    <img src="{{ auth()->user()->avatar }}" alt="Avatar" width="50" height="50" class="rounded-pill">
+                                    <span style="font-size: 13px">{{ Auth::user()->name }}</span>
+                                    <ul class="dropdown-list">
+                                        <li class="dropdown-item">
+                                            <form action="{{ route('dashboard.user') }}" method="post">
+                                                @csrf
+                                                @method('GET')
+                                                <button type="submit"
+                                                    style="background-color: transparent; border:0;">Settings</button>
+                                            </form>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <form action="{{ route('logout') }}" method="post">
+                                                @csrf
+                                                <button type="submit"
+                                                    style="background-color: transparent; border:0;">Log
+                                                    out</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                    @else
+                                    <a href="{{ route('login') }}">Login</a>
+                                    @if (Route::has('register'))
+                                    <a href="{{ route('register') }}">Register</a>
+                                    @endif
+                                    @endauth
                                     @endif
                                 </div>
 
@@ -141,12 +140,12 @@
                             <li><a href="{{ route('site.cart') }}"><span class="icon_bag_alt"></span>
                                     <div class="tip">
                                         @if (Auth::user())
-                                            @php
-                                                $user_id = Auth::user()->id;
-                                            @endphp
-                                            {{ $countItem = App\Models\Cart::where('user_id', $user_id)->count() }}
+                                        @php
+                                        $user_id = Auth::user()->id;
+                                        @endphp
+                                        {{ $countItem = App\Models\Cart::where('user_id', $user_id)->count() }}
                                         @else
-                                            0
+                                        0
                                         @endif
                                     </div>
                                 </a></li>
@@ -192,16 +191,11 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                             cilisis.</p>
                         <div class="footer__payment">
-                            <a href="#"><img src="{{ asset('site/img/payment/payment-1.png') }}"
-                                    alt=""></a>
-                            <a href="#"><img src="{{ asset('site/img/payment/payment-2.png') }}"
-                                    alt=""></a>
-                            <a href="#"><img src="{{ asset('site/img/payment/payment-3.png') }}"
-                                    alt=""></a>
-                            <a href="#"><img src="{{ asset('site/img/payment/payment-4.png') }}"
-                                    alt=""></a>
-                            <a href="#"><img src="{{ asset('site/img/payment/payment-5.png') }}"
-                                    alt=""></a>
+                            <a href="#"><img src="{{ asset('site/img/payment/payment-1.png') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('site/img/payment/payment-2.png') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('site/img/payment/payment-3.png') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('site/img/payment/payment-4.png') }}" alt=""></a>
+                            <a href="#"><img src="{{ asset('site/img/payment/payment-5.png') }}" alt=""></a>
                         </div>
                     </div>
                 </div>
@@ -251,8 +245,7 @@
                         <p>Copyright &copy;
                             <script>
                                 document.write(new Date().getFullYear());
-                            </script> All rights reserved <i class="fa fa-heart"
-                                aria-hidden="true"></i> by Sameh
+                            </script> All rights reserved <i class="fa fa-heart" aria-hidden="true"></i> by Sameh
                         </p>
                     </div>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

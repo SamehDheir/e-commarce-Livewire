@@ -43,7 +43,7 @@ class FacebookController extends Controller
                 $newUser = User::updateOrCreate(['email' => $user->email],[
                         'name' => $user->name,
                         'facebook_id'=> $user->id,
-                        'password' => encrypt('123456dummy')
+                        'password' => encrypt('123456789')
                     ]);
         
                 Auth::login($newUser);

@@ -10,4 +10,6 @@ class UserController extends Controller
 
         return view('admin.tabels.users');
     }
+
+
 }

@@ -42,6 +42,7 @@ Route::prefix('/admin')->group(function () {
     Route::get('/categories', [CategoriesController::class, 'index'])->name('admin.tables.categories')->middleware('admin');
     Route::get('/products', [ProductsController::class, 'index'])->name('admin.tables.products')->middleware('admin');
     Route::get('/blogs', [BlogsController::class, 'index'])->name('admin.tables.blogs')->middleware('admin');
+
 });
 
 // Site Route
@@ -59,6 +60,8 @@ Route::prefix('/')->group(function () {
     Route::post('/cart/store', [CartController::class, 'store'])->name('site.cart.store')->middleware('auth', 'verified');
     Route::get('/category/{id}', [CategoriesController::class, 'show'])->name('site.category');
     Route::post('/comment/{blog_id}', [CommentsController::class, 'store'])->name('site.comment.add');
+ 
+    // Confirm Email Login
     Route::get('/confirm/{token}', 'ConfirmationController@confirm');
 });
 
